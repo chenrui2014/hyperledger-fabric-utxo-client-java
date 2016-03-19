@@ -11,6 +11,7 @@ public class App {
 
 		String chainFolder = null;
 		boolean testnet;
+		int maxBlocks;
 		String chaincodeName = null;
 		String peerHost = null;
 		int peerPort;
@@ -22,6 +23,7 @@ public class App {
 			prop.load(in);
 			chainFolder = prop.getProperty("chain_folder");
 			testnet = new Boolean(prop.getProperty("testnet")).booleanValue();
+			maxBlocks = Integer.parseInt(prop.getProperty("max_blocks"));
 			chaincodeName = prop.getProperty("chaincode_name");
 			peerHost = prop.getProperty("peer_host");
 			peerPort = Integer.parseInt(prop.getProperty("peer_port"));
@@ -45,7 +47,7 @@ public class App {
 
 			Block block = chain.nextBlock();
 			int i=0;
-			while(block != null) {
+			while(block != null && (maxBlocks == -1 || i < maxBlocks)) {
 				System.out.println("\nBlock: " + i);
 				System.out.println("Block hash: " + block.getBlockHash());
 				System.out.println("Transaction count: " + block.getTransactions().size());
