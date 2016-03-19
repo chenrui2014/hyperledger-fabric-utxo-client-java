@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Properties;
 
 public class App {
-	
+
 	public static void main(String[] args) {
-		
+
 		String chainFolder = null;
 		boolean testnet;
 		String chaincodeName = null;
@@ -33,28 +33,28 @@ public class App {
 					in.close();
 				} catch(IOException e) {
 					throw new RuntimeException(e);
-				} 
+				}
 			}
 		}
-		
+
 		try {
 			Chain chain = new Chain(chainFolder, testnet);
-			
+
 			// gRPC connection to the peer
 			Client client = new Client(peerHost, peerPort);
-			
+
 			Block block = chain.nextBlock();
 			int i=0;
-			while(block != null && i<400) {
+			while(block != null) {
 				System.out.println("\nBlock: " + i);
 				System.out.println("Block hash: " + block.getBlockHash());
 				System.out.println("Transaction count: " + block.getTransactions().size());
-				
+
 				List<byte[]> transactions = block.getTransactions();
 				for(byte[] transactionBytes : transactions) {
 					client.invoke(chaincodeName, transactionBytes);
 				}
-				
+
 				//Block.printTransactionHashes(block.getTransactions());
 				i++;
 				block = chain.nextBlock();
@@ -62,7 +62,7 @@ public class App {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		
+
 	}
 
 }
