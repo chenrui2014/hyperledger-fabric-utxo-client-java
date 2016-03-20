@@ -23,5 +23,5 @@ gradle build
 
 4. Start the client
 ```
-gradle Run
+gradle run
 ```
