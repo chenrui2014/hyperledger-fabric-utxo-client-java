@@ -16,12 +16,12 @@ cd obc-utxo-client-java
 
 2. Build
 ```
-gradle build
+./gradlew build
 ```
 
 3. Copy the config.properties file ./src/main/java/com/github/openblockchain/obcpeer/utxo/config.properties to ./build/classes/main/com/github/openblockchain/obcpeer/utxo/config.properties
 
 4. Start the client
 ```
-gradle run
+./gradlew run
 ```
