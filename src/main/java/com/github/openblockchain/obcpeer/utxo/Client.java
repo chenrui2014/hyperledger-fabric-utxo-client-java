@@ -13,55 +13,33 @@ import protos.DevopsGrpc;
 import protos.DevopsGrpc.DevopsBlockingStub;
 
 public class Client {
-	
-	
+
+
 	private DevopsBlockingStub dbs;
-	
+
 	public Client(String host, int port) {
 		ManagedChannel channel = NettyChannelBuilder.forAddress(host, port).negotiationType(NegotiationType.PLAINTEXT).build();
 		this.dbs = DevopsGrpc.newBlockingStub(channel);
 	}
-	
+
 	public void invoke(String chaincodeName, byte[] transaction) {
 		String encodedTransaction = Base64.getEncoder().encodeToString(transaction);
-		
+
 		ChaincodeID.Builder chaincodeId = ChaincodeID.newBuilder();
 		chaincodeId.setName(chaincodeName);
-		
+
 		ChaincodeInput.Builder chaincodeInput = ChaincodeInput.newBuilder();
 		chaincodeInput.setFunction("execute");
 		chaincodeInput.addArgs(encodedTransaction);
-		
+
 		ChaincodeSpec.Builder chaincodeSpec = ChaincodeSpec.newBuilder();
 		chaincodeSpec.setChaincodeID(chaincodeId);
 		chaincodeSpec.setCtorMsg(chaincodeInput);
-		
+
 		ChaincodeInvocationSpec.Builder chaincodeInvocationSpec = ChaincodeInvocationSpec.newBuilder();
 		chaincodeInvocationSpec.setChaincodeSpec(chaincodeSpec);
-		
+
 		dbs.invoke(chaincodeInvocationSpec.build());
 	}
-	
-//	public void invoke() {
-//		//Base64.getEncoder().encodeToString(
-//		
-//		ChaincodeID.Builder chaincodeId = ChaincodeID.newBuilder();
-//		chaincodeId.setName("map30");
-//		
-//		ChaincodeInput.Builder chaincodeInput = ChaincodeInput.newBuilder();
-//		chaincodeInput.setFunction("put");
-//		chaincodeInput.addArgs("test2");
-//		chaincodeInput.addArgs("foobar");
-//		
-//		ChaincodeSpec.Builder chaincodeSpec = ChaincodeSpec.newBuilder();
-//		chaincodeSpec.setChaincodeID(chaincodeId);
-//		chaincodeSpec.setCtorMsg(chaincodeInput);
-//		
-//		ChaincodeInvocationSpec.Builder chaincodeInvocationSpec = ChaincodeInvocationSpec.newBuilder();
-//		chaincodeInvocationSpec.setChaincodeSpec(chaincodeSpec);
-//		
-//		dbs.invoke(chaincodeInvocationSpec.build());
-//	}
-	
 
 }
