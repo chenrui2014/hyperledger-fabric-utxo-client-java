@@ -14,7 +14,7 @@ apply plugin: 'application'
 
 startScripts.enabled = false
 run.enabled = true
-mainClassName = 'com.github.openblockchain.obcpeer.utxo.App'
+mainClassName = 'com.github.srderson.hyperledger_fabric_utxo_client_java.App'
 
 repositories {
 	mavenCentral()

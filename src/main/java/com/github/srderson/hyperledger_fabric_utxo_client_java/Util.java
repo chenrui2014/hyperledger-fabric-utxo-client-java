@@ -1,4 +1,4 @@
-package com.github.openblockchain.obcpeer.utxo;
+package com.github.srderson.hyperledger_fabric_utxo_client_java;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -7,9 +7,9 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 public class Util {
-	
+
 	public static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
-	
+
 
 	public static byte[] readBytesToByteArrayOutputStream(RandomAccessFile file, int bytesToRead, ByteArrayOutputStream baos) throws IOException {
 		byte[] bytes = new byte[bytesToRead];
@@ -20,13 +20,13 @@ public class Util {
 		baos.write(bytes);
 		return bytes;
 	}
-	
-	
+
+
 	public static long readVariableLengthInt(RandomAccessFile file) throws IOException {
 		byte[] b = readVariableLengthIntBytes(file);
 		return getVariableLengthInt(b);
 	}
-	
+
 	public static long getVariableLengthInt(byte[] bytes) {
 		long retVal = 0;
 		if(bytes.length == 1) {
@@ -40,7 +40,7 @@ public class Util {
 		}
 		return retVal;
 	}
-	
+
 	public static byte[] readVariableLengthIntBytes(RandomAccessFile file) throws IOException {
 		ByteArrayOutputStream retVal = new ByteArrayOutputStream();
 		byte variableLenIntByte = file.readByte();
@@ -61,19 +61,19 @@ public class Util {
 		}
 		return retVal.toByteArray();
 	}
-	
+
 	public static short bytesToLittleEndianUint16(byte[] bytes) {
 		return ByteBuffer.wrap(bytes).order(java.nio.ByteOrder.LITTLE_ENDIAN).getShort();
 	}
-	
+
 	public static int bytesToLittleEndianUint32(byte[] bytes) {
 		return ByteBuffer.wrap(bytes).order(java.nio.ByteOrder.LITTLE_ENDIAN).getInt();
 	}
-	
+
 	public static long bytesToLittleEndianUint64(byte[] bytes) {
 		return ByteBuffer.wrap(bytes).order(java.nio.ByteOrder.LITTLE_ENDIAN).getLong();
 	}
-	
+
 	public static String byteArrayToHex(byte[] bytes) {
 		char[] hexChars = new char[bytes.length * 2];
 		for(int i=0; i<bytes.length; i++) {
@@ -83,7 +83,7 @@ public class Util {
 		}
 		return new String(hexChars);
 	}
-	
+
 	public static byte[] hexStringToByteArray(String s) {
 	    int len = s.length();
 	    byte[] data = new byte[len / 2];

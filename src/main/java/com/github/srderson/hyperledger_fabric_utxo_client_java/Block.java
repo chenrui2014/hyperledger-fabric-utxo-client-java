@@ -1,4 +1,4 @@
-package com.github.openblockchain.obcpeer.utxo;
+package com.github.srderson.hyperledger_fabric_utxo_client_java;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
