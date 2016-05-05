@@ -4,12 +4,12 @@ This demo client will read transactions from Bitcoin blocks on the local system 
 
 Instructions
 
-1. Deploy the [UTXO example chaincode](https://github.com/openblockchain/obc-peer/tree/master/examples/chaincode/go/utxo)
+1. Deploy the [UTXO example chaincode](https://github.com/hyperledger/fabric/tree/master/examples/chaincode/go/utxo)
 
 1. Clone this project
 ```
-git clone https://github.com/srderson/obc-utxo-client-java.git
-cd obc-utxo-client-java
+git clone https://github.com/srderson/hyperledger-fabric-utxo-client-java.git
+cd hyperledger-fabric-utxo-client-java
 ```
 
 1. Edit the config.properties file in ./src/main/java/com/github/srderson/hyperledger_fabric_utxo_client_java
