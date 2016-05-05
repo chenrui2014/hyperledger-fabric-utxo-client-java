@@ -23,13 +23,13 @@ public class DevopsGrpc {
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi
   public static final io.grpc.MethodDescriptor<protos.DevopsOuterClass.Secret,
-      protos.Openchain.Response> METHOD_LOGIN =
+      protos.Fabric.Response> METHOD_LOGIN =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
               "protos.Devops", "Login"),
           io.grpc.protobuf.ProtoUtils.marshaller(protos.DevopsOuterClass.Secret.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(protos.Openchain.Response.getDefaultInstance()));
+          io.grpc.protobuf.ProtoUtils.marshaller(protos.Fabric.Response.getDefaultInstance()));
   @io.grpc.ExperimentalApi
   public static final io.grpc.MethodDescriptor<protos.Chaincode.ChaincodeSpec,
       protos.Chaincode.ChaincodeDeploymentSpec> METHOD_BUILD =
@@ -50,22 +50,22 @@ public class DevopsGrpc {
           io.grpc.protobuf.ProtoUtils.marshaller(protos.Chaincode.ChaincodeDeploymentSpec.getDefaultInstance()));
   @io.grpc.ExperimentalApi
   public static final io.grpc.MethodDescriptor<protos.Chaincode.ChaincodeInvocationSpec,
-      protos.Openchain.Response> METHOD_INVOKE =
+      protos.Fabric.Response> METHOD_INVOKE =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
               "protos.Devops", "Invoke"),
           io.grpc.protobuf.ProtoUtils.marshaller(protos.Chaincode.ChaincodeInvocationSpec.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(protos.Openchain.Response.getDefaultInstance()));
+          io.grpc.protobuf.ProtoUtils.marshaller(protos.Fabric.Response.getDefaultInstance()));
   @io.grpc.ExperimentalApi
   public static final io.grpc.MethodDescriptor<protos.Chaincode.ChaincodeInvocationSpec,
-      protos.Openchain.Response> METHOD_QUERY =
+      protos.Fabric.Response> METHOD_QUERY =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.UNARY,
           generateFullMethodName(
               "protos.Devops", "Query"),
           io.grpc.protobuf.ProtoUtils.marshaller(protos.Chaincode.ChaincodeInvocationSpec.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(protos.Openchain.Response.getDefaultInstance()));
+          io.grpc.protobuf.ProtoUtils.marshaller(protos.Fabric.Response.getDefaultInstance()));
 
   public static DevopsStub newStub(io.grpc.Channel channel) {
     return new DevopsStub(channel);
@@ -84,7 +84,7 @@ public class DevopsGrpc {
   public static interface Devops {
 
     public void login(protos.DevopsOuterClass.Secret request,
-        io.grpc.stub.StreamObserver<protos.Openchain.Response> responseObserver);
+        io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver);
 
     public void build(protos.Chaincode.ChaincodeSpec request,
         io.grpc.stub.StreamObserver<protos.Chaincode.ChaincodeDeploymentSpec> responseObserver);
@@ -93,28 +93,28 @@ public class DevopsGrpc {
         io.grpc.stub.StreamObserver<protos.Chaincode.ChaincodeDeploymentSpec> responseObserver);
 
     public void invoke(protos.Chaincode.ChaincodeInvocationSpec request,
-        io.grpc.stub.StreamObserver<protos.Openchain.Response> responseObserver);
+        io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver);
 
     public void query(protos.Chaincode.ChaincodeInvocationSpec request,
-        io.grpc.stub.StreamObserver<protos.Openchain.Response> responseObserver);
+        io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver);
   }
 
   public static interface DevopsBlockingClient {
 
-    public protos.Openchain.Response login(protos.DevopsOuterClass.Secret request);
+    public protos.Fabric.Response login(protos.DevopsOuterClass.Secret request);
 
     public protos.Chaincode.ChaincodeDeploymentSpec build(protos.Chaincode.ChaincodeSpec request);
 
     public protos.Chaincode.ChaincodeDeploymentSpec deploy(protos.Chaincode.ChaincodeSpec request);
 
-    public protos.Openchain.Response invoke(protos.Chaincode.ChaincodeInvocationSpec request);
+    public protos.Fabric.Response invoke(protos.Chaincode.ChaincodeInvocationSpec request);
 
-    public protos.Openchain.Response query(protos.Chaincode.ChaincodeInvocationSpec request);
+    public protos.Fabric.Response query(protos.Chaincode.ChaincodeInvocationSpec request);
   }
 
   public static interface DevopsFutureClient {
 
-    public com.google.common.util.concurrent.ListenableFuture<protos.Openchain.Response> login(
+    public com.google.common.util.concurrent.ListenableFuture<protos.Fabric.Response> login(
         protos.DevopsOuterClass.Secret request);
 
     public com.google.common.util.concurrent.ListenableFuture<protos.Chaincode.ChaincodeDeploymentSpec> build(
@@ -123,10 +123,10 @@ public class DevopsGrpc {
     public com.google.common.util.concurrent.ListenableFuture<protos.Chaincode.ChaincodeDeploymentSpec> deploy(
         protos.Chaincode.ChaincodeSpec request);
 
-    public com.google.common.util.concurrent.ListenableFuture<protos.Openchain.Response> invoke(
+    public com.google.common.util.concurrent.ListenableFuture<protos.Fabric.Response> invoke(
         protos.Chaincode.ChaincodeInvocationSpec request);
 
-    public com.google.common.util.concurrent.ListenableFuture<protos.Openchain.Response> query(
+    public com.google.common.util.concurrent.ListenableFuture<protos.Fabric.Response> query(
         protos.Chaincode.ChaincodeInvocationSpec request);
   }
 
@@ -149,7 +149,7 @@ public class DevopsGrpc {
 
     @java.lang.Override
     public void login(protos.DevopsOuterClass.Secret request,
-        io.grpc.stub.StreamObserver<protos.Openchain.Response> responseObserver) {
+        io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_LOGIN, getCallOptions()), request, responseObserver);
     }
@@ -170,14 +170,14 @@ public class DevopsGrpc {
 
     @java.lang.Override
     public void invoke(protos.Chaincode.ChaincodeInvocationSpec request,
-        io.grpc.stub.StreamObserver<protos.Openchain.Response> responseObserver) {
+        io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_INVOKE, getCallOptions()), request, responseObserver);
     }
 
     @java.lang.Override
     public void query(protos.Chaincode.ChaincodeInvocationSpec request,
-        io.grpc.stub.StreamObserver<protos.Openchain.Response> responseObserver) {
+        io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_QUERY, getCallOptions()), request, responseObserver);
     }
@@ -201,7 +201,7 @@ public class DevopsGrpc {
     }
 
     @java.lang.Override
-    public protos.Openchain.Response login(protos.DevopsOuterClass.Secret request) {
+    public protos.Fabric.Response login(protos.DevopsOuterClass.Secret request) {
       return blockingUnaryCall(
           getChannel().newCall(METHOD_LOGIN, getCallOptions()), request);
     }
@@ -219,13 +219,13 @@ public class DevopsGrpc {
     }
 
     @java.lang.Override
-    public protos.Openchain.Response invoke(protos.Chaincode.ChaincodeInvocationSpec request) {
+    public protos.Fabric.Response invoke(protos.Chaincode.ChaincodeInvocationSpec request) {
       return blockingUnaryCall(
           getChannel().newCall(METHOD_INVOKE, getCallOptions()), request);
     }
 
     @java.lang.Override
-    public protos.Openchain.Response query(protos.Chaincode.ChaincodeInvocationSpec request) {
+    public protos.Fabric.Response query(protos.Chaincode.ChaincodeInvocationSpec request) {
       return blockingUnaryCall(
           getChannel().newCall(METHOD_QUERY, getCallOptions()), request);
     }
@@ -249,7 +249,7 @@ public class DevopsGrpc {
     }
 
     @java.lang.Override
-    public com.google.common.util.concurrent.ListenableFuture<protos.Openchain.Response> login(
+    public com.google.common.util.concurrent.ListenableFuture<protos.Fabric.Response> login(
         protos.DevopsOuterClass.Secret request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_LOGIN, getCallOptions()), request);
@@ -270,14 +270,14 @@ public class DevopsGrpc {
     }
 
     @java.lang.Override
-    public com.google.common.util.concurrent.ListenableFuture<protos.Openchain.Response> invoke(
+    public com.google.common.util.concurrent.ListenableFuture<protos.Fabric.Response> invoke(
         protos.Chaincode.ChaincodeInvocationSpec request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_INVOKE, getCallOptions()), request);
     }
 
     @java.lang.Override
-    public com.google.common.util.concurrent.ListenableFuture<protos.Openchain.Response> query(
+    public com.google.common.util.concurrent.ListenableFuture<protos.Fabric.Response> query(
         protos.Chaincode.ChaincodeInvocationSpec request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_QUERY, getCallOptions()), request);
@@ -292,11 +292,11 @@ public class DevopsGrpc {
         asyncUnaryCall(
           new io.grpc.stub.ServerCalls.UnaryMethod<
               protos.DevopsOuterClass.Secret,
-              protos.Openchain.Response>() {
+              protos.Fabric.Response>() {
             @java.lang.Override
             public void invoke(
                 protos.DevopsOuterClass.Secret request,
-                io.grpc.stub.StreamObserver<protos.Openchain.Response> responseObserver) {
+                io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver) {
               serviceImpl.login(request, responseObserver);
             }
           }))
@@ -331,11 +331,11 @@ public class DevopsGrpc {
         asyncUnaryCall(
           new io.grpc.stub.ServerCalls.UnaryMethod<
               protos.Chaincode.ChaincodeInvocationSpec,
-              protos.Openchain.Response>() {
+              protos.Fabric.Response>() {
             @java.lang.Override
             public void invoke(
                 protos.Chaincode.ChaincodeInvocationSpec request,
-                io.grpc.stub.StreamObserver<protos.Openchain.Response> responseObserver) {
+                io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver) {
               serviceImpl.invoke(request, responseObserver);
             }
           }))
@@ -344,11 +344,11 @@ public class DevopsGrpc {
         asyncUnaryCall(
           new io.grpc.stub.ServerCalls.UnaryMethod<
               protos.Chaincode.ChaincodeInvocationSpec,
-              protos.Openchain.Response>() {
+              protos.Fabric.Response>() {
             @java.lang.Override
             public void invoke(
                 protos.Chaincode.ChaincodeInvocationSpec request,
-                io.grpc.stub.StreamObserver<protos.Openchain.Response> responseObserver) {
+                io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver) {
               serviceImpl.query(request, responseObserver);
             }
           })).build();

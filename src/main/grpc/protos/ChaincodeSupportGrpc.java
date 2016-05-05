@@ -22,15 +22,6 @@ public class ChaincodeSupportGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi
-  public static final io.grpc.MethodDescriptor<protos.Chaincode.ChaincodeRequestContext,
-      protos.Chaincode.ChaincodeExecutionContext> METHOD_GET_EXECUTION_CONTEXT =
-      io.grpc.MethodDescriptor.create(
-          io.grpc.MethodDescriptor.MethodType.UNARY,
-          generateFullMethodName(
-              "protos.ChaincodeSupport", "GetExecutionContext"),
-          io.grpc.protobuf.ProtoUtils.marshaller(protos.Chaincode.ChaincodeRequestContext.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(protos.Chaincode.ChaincodeExecutionContext.getDefaultInstance()));
-  @io.grpc.ExperimentalApi
   public static final io.grpc.MethodDescriptor<protos.Chaincode.ChaincodeMessage,
       protos.Chaincode.ChaincodeMessage> METHOD_REGISTER =
       io.grpc.MethodDescriptor.create(
@@ -56,22 +47,14 @@ public class ChaincodeSupportGrpc {
 
   public static interface ChaincodeSupport {
 
-    public void getExecutionContext(protos.Chaincode.ChaincodeRequestContext request,
-        io.grpc.stub.StreamObserver<protos.Chaincode.ChaincodeExecutionContext> responseObserver);
-
     public io.grpc.stub.StreamObserver<protos.Chaincode.ChaincodeMessage> register(
         io.grpc.stub.StreamObserver<protos.Chaincode.ChaincodeMessage> responseObserver);
   }
 
   public static interface ChaincodeSupportBlockingClient {
-
-    public protos.Chaincode.ChaincodeExecutionContext getExecutionContext(protos.Chaincode.ChaincodeRequestContext request);
   }
 
   public static interface ChaincodeSupportFutureClient {
-
-    public com.google.common.util.concurrent.ListenableFuture<protos.Chaincode.ChaincodeExecutionContext> getExecutionContext(
-        protos.Chaincode.ChaincodeRequestContext request);
   }
 
   public static class ChaincodeSupportStub extends io.grpc.stub.AbstractStub<ChaincodeSupportStub>
@@ -89,13 +72,6 @@ public class ChaincodeSupportGrpc {
     protected ChaincodeSupportStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new ChaincodeSupportStub(channel, callOptions);
-    }
-
-    @java.lang.Override
-    public void getExecutionContext(protos.Chaincode.ChaincodeRequestContext request,
-        io.grpc.stub.StreamObserver<protos.Chaincode.ChaincodeExecutionContext> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(METHOD_GET_EXECUTION_CONTEXT, getCallOptions()), request, responseObserver);
     }
 
     @java.lang.Override
@@ -122,12 +98,6 @@ public class ChaincodeSupportGrpc {
         io.grpc.CallOptions callOptions) {
       return new ChaincodeSupportBlockingStub(channel, callOptions);
     }
-
-    @java.lang.Override
-    public protos.Chaincode.ChaincodeExecutionContext getExecutionContext(protos.Chaincode.ChaincodeRequestContext request) {
-      return blockingUnaryCall(
-          getChannel().newCall(METHOD_GET_EXECUTION_CONTEXT, getCallOptions()), request);
-    }
   }
 
   public static class ChaincodeSupportFutureStub extends io.grpc.stub.AbstractStub<ChaincodeSupportFutureStub>
@@ -146,31 +116,11 @@ public class ChaincodeSupportGrpc {
         io.grpc.CallOptions callOptions) {
       return new ChaincodeSupportFutureStub(channel, callOptions);
     }
-
-    @java.lang.Override
-    public com.google.common.util.concurrent.ListenableFuture<protos.Chaincode.ChaincodeExecutionContext> getExecutionContext(
-        protos.Chaincode.ChaincodeRequestContext request) {
-      return futureUnaryCall(
-          getChannel().newCall(METHOD_GET_EXECUTION_CONTEXT, getCallOptions()), request);
-    }
   }
 
   public static io.grpc.ServerServiceDefinition bindService(
       final ChaincodeSupport serviceImpl) {
     return io.grpc.ServerServiceDefinition.builder(SERVICE_NAME)
-      .addMethod(
-        METHOD_GET_EXECUTION_CONTEXT,
-        asyncUnaryCall(
-          new io.grpc.stub.ServerCalls.UnaryMethod<
-              protos.Chaincode.ChaincodeRequestContext,
-              protos.Chaincode.ChaincodeExecutionContext>() {
-            @java.lang.Override
-            public void invoke(
-                protos.Chaincode.ChaincodeRequestContext request,
-                io.grpc.stub.StreamObserver<protos.Chaincode.ChaincodeExecutionContext> responseObserver) {
-              serviceImpl.getExecutionContext(request, responseObserver);
-            }
-          }))
       .addMethod(
         METHOD_REGISTER,
         asyncBidiStreamingCall(

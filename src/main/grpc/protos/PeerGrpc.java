@@ -22,14 +22,23 @@ public class PeerGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi
-  public static final io.grpc.MethodDescriptor<protos.Openchain.OpenchainMessage,
-      protos.Openchain.OpenchainMessage> METHOD_CHAT =
+  public static final io.grpc.MethodDescriptor<protos.Fabric.Message,
+      protos.Fabric.Message> METHOD_CHAT =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING,
           generateFullMethodName(
               "protos.Peer", "Chat"),
-          io.grpc.protobuf.ProtoUtils.marshaller(protos.Openchain.OpenchainMessage.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(protos.Openchain.OpenchainMessage.getDefaultInstance()));
+          io.grpc.protobuf.ProtoUtils.marshaller(protos.Fabric.Message.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(protos.Fabric.Message.getDefaultInstance()));
+  @io.grpc.ExperimentalApi
+  public static final io.grpc.MethodDescriptor<protos.Fabric.Transaction,
+      protos.Fabric.Response> METHOD_PROCESS_TRANSACTION =
+      io.grpc.MethodDescriptor.create(
+          io.grpc.MethodDescriptor.MethodType.UNARY,
+          generateFullMethodName(
+              "protos.Peer", "ProcessTransaction"),
+          io.grpc.protobuf.ProtoUtils.marshaller(protos.Fabric.Transaction.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(protos.Fabric.Response.getDefaultInstance()));
 
   public static PeerStub newStub(io.grpc.Channel channel) {
     return new PeerStub(channel);
@@ -47,14 +56,22 @@ public class PeerGrpc {
 
   public static interface Peer {
 
-    public io.grpc.stub.StreamObserver<protos.Openchain.OpenchainMessage> chat(
-        io.grpc.stub.StreamObserver<protos.Openchain.OpenchainMessage> responseObserver);
+    public io.grpc.stub.StreamObserver<protos.Fabric.Message> chat(
+        io.grpc.stub.StreamObserver<protos.Fabric.Message> responseObserver);
+
+    public void processTransaction(protos.Fabric.Transaction request,
+        io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver);
   }
 
   public static interface PeerBlockingClient {
+
+    public protos.Fabric.Response processTransaction(protos.Fabric.Transaction request);
   }
 
   public static interface PeerFutureClient {
+
+    public com.google.common.util.concurrent.ListenableFuture<protos.Fabric.Response> processTransaction(
+        protos.Fabric.Transaction request);
   }
 
   public static class PeerStub extends io.grpc.stub.AbstractStub<PeerStub>
@@ -75,10 +92,17 @@ public class PeerGrpc {
     }
 
     @java.lang.Override
-    public io.grpc.stub.StreamObserver<protos.Openchain.OpenchainMessage> chat(
-        io.grpc.stub.StreamObserver<protos.Openchain.OpenchainMessage> responseObserver) {
+    public io.grpc.stub.StreamObserver<protos.Fabric.Message> chat(
+        io.grpc.stub.StreamObserver<protos.Fabric.Message> responseObserver) {
       return asyncBidiStreamingCall(
           getChannel().newCall(METHOD_CHAT, getCallOptions()), responseObserver);
+    }
+
+    @java.lang.Override
+    public void processTransaction(protos.Fabric.Transaction request,
+        io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_PROCESS_TRANSACTION, getCallOptions()), request, responseObserver);
     }
   }
 
@@ -98,6 +122,12 @@ public class PeerGrpc {
         io.grpc.CallOptions callOptions) {
       return new PeerBlockingStub(channel, callOptions);
     }
+
+    @java.lang.Override
+    public protos.Fabric.Response processTransaction(protos.Fabric.Transaction request) {
+      return blockingUnaryCall(
+          getChannel().newCall(METHOD_PROCESS_TRANSACTION, getCallOptions()), request);
+    }
   }
 
   public static class PeerFutureStub extends io.grpc.stub.AbstractStub<PeerFutureStub>
@@ -116,6 +146,13 @@ public class PeerGrpc {
         io.grpc.CallOptions callOptions) {
       return new PeerFutureStub(channel, callOptions);
     }
+
+    @java.lang.Override
+    public com.google.common.util.concurrent.ListenableFuture<protos.Fabric.Response> processTransaction(
+        protos.Fabric.Transaction request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_PROCESS_TRANSACTION, getCallOptions()), request);
+    }
   }
 
   public static io.grpc.ServerServiceDefinition bindService(
@@ -125,12 +162,25 @@ public class PeerGrpc {
         METHOD_CHAT,
         asyncBidiStreamingCall(
           new io.grpc.stub.ServerCalls.BidiStreamingMethod<
-              protos.Openchain.OpenchainMessage,
-              protos.Openchain.OpenchainMessage>() {
+              protos.Fabric.Message,
+              protos.Fabric.Message>() {
             @java.lang.Override
-            public io.grpc.stub.StreamObserver<protos.Openchain.OpenchainMessage> invoke(
-                io.grpc.stub.StreamObserver<protos.Openchain.OpenchainMessage> responseObserver) {
+            public io.grpc.stub.StreamObserver<protos.Fabric.Message> invoke(
+                io.grpc.stub.StreamObserver<protos.Fabric.Message> responseObserver) {
               return serviceImpl.chat(responseObserver);
+            }
+          }))
+      .addMethod(
+        METHOD_PROCESS_TRANSACTION,
+        asyncUnaryCall(
+          new io.grpc.stub.ServerCalls.UnaryMethod<
+              protos.Fabric.Transaction,
+              protos.Fabric.Response>() {
+            @java.lang.Override
+            public void invoke(
+                protos.Fabric.Transaction request,
+                io.grpc.stub.StreamObserver<protos.Fabric.Response> responseObserver) {
+              serviceImpl.processTransaction(request, responseObserver);
             }
           })).build();
   }

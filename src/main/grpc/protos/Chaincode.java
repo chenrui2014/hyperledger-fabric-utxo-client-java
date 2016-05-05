@@ -1643,6 +1643,10 @@ public final class Chaincode {
        * <code>NODE = 2;</code>
        */
       NODE(2, 2),
+      /**
+       * <code>CAR = 3;</code>
+       */
+      CAR(3, 3),
       UNRECOGNIZED(-1, -1),
       ;
 
@@ -1658,6 +1662,10 @@ public final class Chaincode {
        * <code>NODE = 2;</code>
        */
       public static final int NODE_VALUE = 2;
+      /**
+       * <code>CAR = 3;</code>
+       */
+      public static final int CAR_VALUE = 3;
 
 
       public final int getNumber() {
@@ -1673,6 +1681,7 @@ public final class Chaincode {
           case 0: return UNDEFINED;
           case 1: return GOLANG;
           case 2: return NODE;
+          case 3: return CAR;
           default: return null;
         }
       }
@@ -2707,6 +2716,15 @@ public final class Chaincode {
      * <code>optional bytes codePackage = 3;</code>
      */
     com.google.protobuf.ByteString getCodePackage();
+
+    /**
+     * <code>optional .protos.ChaincodeDeploymentSpec.ExecutionEnvironment execEnv = 4;</code>
+     */
+    int getExecEnvValue();
+    /**
+     * <code>optional .protos.ChaincodeDeploymentSpec.ExecutionEnvironment execEnv = 4;</code>
+     */
+    protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment getExecEnv();
   }
   /**
    * Protobuf type {@code protos.ChaincodeDeploymentSpec}
@@ -2726,6 +2744,7 @@ public final class Chaincode {
     }
     private ChaincodeDeploymentSpec() {
       codePackage_ = com.google.protobuf.ByteString.EMPTY;
+      execEnv_ = 0;
     }
 
     @java.lang.Override
@@ -2783,6 +2802,12 @@ public final class Chaincode {
               codePackage_ = input.readBytes();
               break;
             }
+            case 32: {
+              int rawValue = input.readEnum();
+
+              execEnv_ = rawValue;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -2805,6 +2830,98 @@ public final class Chaincode {
       return protos.Chaincode.internal_static_protos_ChaincodeDeploymentSpec_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               protos.Chaincode.ChaincodeDeploymentSpec.class, protos.Chaincode.ChaincodeDeploymentSpec.Builder.class);
+    }
+
+    /**
+     * Protobuf enum {@code protos.ChaincodeDeploymentSpec.ExecutionEnvironment}
+     */
+    public enum ExecutionEnvironment
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>DOCKER = 0;</code>
+       */
+      DOCKER(0, 0),
+      /**
+       * <code>SYSTEM = 1;</code>
+       */
+      SYSTEM(1, 1),
+      UNRECOGNIZED(-1, -1),
+      ;
+
+      /**
+       * <code>DOCKER = 0;</code>
+       */
+      public static final int DOCKER_VALUE = 0;
+      /**
+       * <code>SYSTEM = 1;</code>
+       */
+      public static final int SYSTEM_VALUE = 1;
+
+
+      public final int getNumber() {
+        if (index == -1) {
+          throw new java.lang.IllegalArgumentException(
+              "Can't get the number of an unknown enum value.");
+        }
+        return value;
+      }
+
+      public static ExecutionEnvironment valueOf(int value) {
+        switch (value) {
+          case 0: return DOCKER;
+          case 1: return SYSTEM;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<ExecutionEnvironment>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          ExecutionEnvironment> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<ExecutionEnvironment>() {
+              public ExecutionEnvironment findValueByNumber(int number) {
+                return ExecutionEnvironment.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return protos.Chaincode.ChaincodeDeploymentSpec.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final ExecutionEnvironment[] VALUES = values();
+
+      public static ExecutionEnvironment valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        if (desc.getIndex() == -1) {
+          return UNRECOGNIZED;
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private ExecutionEnvironment(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:protos.ChaincodeDeploymentSpec.ExecutionEnvironment)
     }
 
     public static final int CHAINCODESPEC_FIELD_NUMBER = 1;
@@ -2870,6 +2987,22 @@ public final class Chaincode {
       return codePackage_;
     }
 
+    public static final int EXECENV_FIELD_NUMBER = 4;
+    private int execEnv_;
+    /**
+     * <code>optional .protos.ChaincodeDeploymentSpec.ExecutionEnvironment execEnv = 4;</code>
+     */
+    public int getExecEnvValue() {
+      return execEnv_;
+    }
+    /**
+     * <code>optional .protos.ChaincodeDeploymentSpec.ExecutionEnvironment execEnv = 4;</code>
+     */
+    public protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment getExecEnv() {
+      protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment result = protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment.valueOf(execEnv_);
+      return result == null ? protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment.UNRECOGNIZED : result;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -2891,6 +3024,9 @@ public final class Chaincode {
       if (!codePackage_.isEmpty()) {
         output.writeBytes(3, codePackage_);
       }
+      if (execEnv_ != protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment.DOCKER.getNumber()) {
+        output.writeEnum(4, execEnv_);
+      }
     }
 
     public int getSerializedSize() {
@@ -2909,6 +3045,10 @@ public final class Chaincode {
       if (!codePackage_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, codePackage_);
+      }
+      if (execEnv_ != protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment.DOCKER.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, execEnv_);
       }
       memoizedSize = size;
       return size;
@@ -3040,6 +3180,8 @@ public final class Chaincode {
         }
         codePackage_ = com.google.protobuf.ByteString.EMPTY;
 
+        execEnv_ = 0;
+
         return this;
       }
 
@@ -3073,6 +3215,7 @@ public final class Chaincode {
           result.effectiveDate_ = effectiveDateBuilder_.build();
         }
         result.codePackage_ = codePackage_;
+        result.execEnv_ = execEnv_;
         onBuilt();
         return result;
       }
@@ -3096,6 +3239,9 @@ public final class Chaincode {
         }
         if (other.getCodePackage() != com.google.protobuf.ByteString.EMPTY) {
           setCodePackage(other.getCodePackage());
+        }
+        if (other.execEnv_ != 0) {
+          setExecEnvValue(other.getExecEnvValue());
         }
         onChanged();
         return this;
@@ -3418,6 +3564,50 @@ public final class Chaincode {
       public Builder clearCodePackage() {
         
         codePackage_ = getDefaultInstance().getCodePackage();
+        onChanged();
+        return this;
+      }
+
+      private int execEnv_ = 0;
+      /**
+       * <code>optional .protos.ChaincodeDeploymentSpec.ExecutionEnvironment execEnv = 4;</code>
+       */
+      public int getExecEnvValue() {
+        return execEnv_;
+      }
+      /**
+       * <code>optional .protos.ChaincodeDeploymentSpec.ExecutionEnvironment execEnv = 4;</code>
+       */
+      public Builder setExecEnvValue(int value) {
+        execEnv_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .protos.ChaincodeDeploymentSpec.ExecutionEnvironment execEnv = 4;</code>
+       */
+      public protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment getExecEnv() {
+        protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment result = protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment.valueOf(execEnv_);
+        return result == null ? protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>optional .protos.ChaincodeDeploymentSpec.ExecutionEnvironment execEnv = 4;</code>
+       */
+      public Builder setExecEnv(protos.Chaincode.ChaincodeDeploymentSpec.ExecutionEnvironment value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        execEnv_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .protos.ChaincodeDeploymentSpec.ExecutionEnvironment execEnv = 4;</code>
+       */
+      public Builder clearExecEnv() {
+        
+        execEnv_ = 0;
         onChanged();
         return this;
       }
@@ -4048,45 +4238,58 @@ public final class Chaincode {
 
   }
 
-  public interface ChaincodeIdentifierOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:protos.ChaincodeIdentifier)
+  public interface ChaincodeSecurityContextOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:protos.ChaincodeSecurityContext)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string Url = 1;</code>
-     *
-     * <pre>
-     * URL for accessing the Chaincode, eg. https://github.com/user/SampleContract
-     * </pre>
+     * <code>optional bytes callerCert = 1;</code>
      */
-    java.lang.String getUrl();
+    com.google.protobuf.ByteString getCallerCert();
+
     /**
-     * <code>optional string Url = 1;</code>
-     *
-     * <pre>
-     * URL for accessing the Chaincode, eg. https://github.com/user/SampleContract
-     * </pre>
+     * <code>optional bytes callerSign = 2;</code>
      */
-    com.google.protobuf.ByteString
-        getUrlBytes();
+    com.google.protobuf.ByteString getCallerSign();
+
+    /**
+     * <code>optional bytes payload = 3;</code>
+     */
+    com.google.protobuf.ByteString getPayload();
+
+    /**
+     * <code>optional bytes binding = 4;</code>
+     */
+    com.google.protobuf.ByteString getBinding();
+
+    /**
+     * <code>optional bytes metadata = 5;</code>
+     */
+    com.google.protobuf.ByteString getMetadata();
+
+    /**
+     * <code>optional bytes parentMetadata = 6;</code>
+     */
+    com.google.protobuf.ByteString getParentMetadata();
   }
   /**
-   * Protobuf type {@code protos.ChaincodeIdentifier}
-   *
-   * <pre>
-   * TODO: Merge this with ChaincodeID.
-   * </pre>
+   * Protobuf type {@code protos.ChaincodeSecurityContext}
    */
-  public  static final class ChaincodeIdentifier extends
+  public  static final class ChaincodeSecurityContext extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:protos.ChaincodeIdentifier)
-      ChaincodeIdentifierOrBuilder {
-    // Use ChaincodeIdentifier.newBuilder() to construct.
-    private ChaincodeIdentifier(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:protos.ChaincodeSecurityContext)
+      ChaincodeSecurityContextOrBuilder {
+    // Use ChaincodeSecurityContext.newBuilder() to construct.
+    private ChaincodeSecurityContext(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
-    private ChaincodeIdentifier() {
-      url_ = "";
+    private ChaincodeSecurityContext() {
+      callerCert_ = com.google.protobuf.ByteString.EMPTY;
+      callerSign_ = com.google.protobuf.ByteString.EMPTY;
+      payload_ = com.google.protobuf.ByteString.EMPTY;
+      binding_ = com.google.protobuf.ByteString.EMPTY;
+      metadata_ = com.google.protobuf.ByteString.EMPTY;
+      parentMetadata_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -4094,7 +4297,7 @@ public final class Chaincode {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private ChaincodeIdentifier(
+    private ChaincodeSecurityContext(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
       this();
@@ -4114,9 +4317,33 @@ public final class Chaincode {
               break;
             }
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
 
-              url_ = s;
+              callerCert_ = input.readBytes();
+              break;
+            }
+            case 18: {
+
+              callerSign_ = input.readBytes();
+              break;
+            }
+            case 26: {
+
+              payload_ = input.readBytes();
+              break;
+            }
+            case 34: {
+
+              binding_ = input.readBytes();
+              break;
+            }
+            case 42: {
+
+              metadata_ = input.readBytes();
+              break;
+            }
+            case 50: {
+
+              parentMetadata_ = input.readBytes();
               break;
             }
           }
@@ -4133,56 +4360,68 @@ public final class Chaincode {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return protos.Chaincode.internal_static_protos_ChaincodeIdentifier_descriptor;
+      return protos.Chaincode.internal_static_protos_ChaincodeSecurityContext_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return protos.Chaincode.internal_static_protos_ChaincodeIdentifier_fieldAccessorTable
+      return protos.Chaincode.internal_static_protos_ChaincodeSecurityContext_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              protos.Chaincode.ChaincodeIdentifier.class, protos.Chaincode.ChaincodeIdentifier.Builder.class);
+              protos.Chaincode.ChaincodeSecurityContext.class, protos.Chaincode.ChaincodeSecurityContext.Builder.class);
     }
 
-    public static final int URL_FIELD_NUMBER = 1;
-    private volatile java.lang.Object url_;
+    public static final int CALLERCERT_FIELD_NUMBER = 1;
+    private com.google.protobuf.ByteString callerCert_;
     /**
-     * <code>optional string Url = 1;</code>
-     *
-     * <pre>
-     * URL for accessing the Chaincode, eg. https://github.com/user/SampleContract
-     * </pre>
+     * <code>optional bytes callerCert = 1;</code>
      */
-    public java.lang.String getUrl() {
-      java.lang.Object ref = url_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        url_ = s;
-        return s;
-      }
+    public com.google.protobuf.ByteString getCallerCert() {
+      return callerCert_;
     }
+
+    public static final int CALLERSIGN_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString callerSign_;
     /**
-     * <code>optional string Url = 1;</code>
-     *
-     * <pre>
-     * URL for accessing the Chaincode, eg. https://github.com/user/SampleContract
-     * </pre>
+     * <code>optional bytes callerSign = 2;</code>
      */
-    public com.google.protobuf.ByteString
-        getUrlBytes() {
-      java.lang.Object ref = url_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        url_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.ByteString getCallerSign() {
+      return callerSign_;
+    }
+
+    public static final int PAYLOAD_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString payload_;
+    /**
+     * <code>optional bytes payload = 3;</code>
+     */
+    public com.google.protobuf.ByteString getPayload() {
+      return payload_;
+    }
+
+    public static final int BINDING_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString binding_;
+    /**
+     * <code>optional bytes binding = 4;</code>
+     */
+    public com.google.protobuf.ByteString getBinding() {
+      return binding_;
+    }
+
+    public static final int METADATA_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString metadata_;
+    /**
+     * <code>optional bytes metadata = 5;</code>
+     */
+    public com.google.protobuf.ByteString getMetadata() {
+      return metadata_;
+    }
+
+    public static final int PARENTMETADATA_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString parentMetadata_;
+    /**
+     * <code>optional bytes parentMetadata = 6;</code>
+     */
+    public com.google.protobuf.ByteString getParentMetadata() {
+      return parentMetadata_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -4197,8 +4436,23 @@ public final class Chaincode {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getUrlBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessage.writeString(output, 1, url_);
+      if (!callerCert_.isEmpty()) {
+        output.writeBytes(1, callerCert_);
+      }
+      if (!callerSign_.isEmpty()) {
+        output.writeBytes(2, callerSign_);
+      }
+      if (!payload_.isEmpty()) {
+        output.writeBytes(3, payload_);
+      }
+      if (!binding_.isEmpty()) {
+        output.writeBytes(4, binding_);
+      }
+      if (!metadata_.isEmpty()) {
+        output.writeBytes(5, metadata_);
+      }
+      if (!parentMetadata_.isEmpty()) {
+        output.writeBytes(6, parentMetadata_);
       }
     }
 
@@ -4207,61 +4461,82 @@ public final class Chaincode {
       if (size != -1) return size;
 
       size = 0;
-      if (!getUrlBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, url_);
+      if (!callerCert_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, callerCert_);
+      }
+      if (!callerSign_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, callerSign_);
+      }
+      if (!payload_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, payload_);
+      }
+      if (!binding_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, binding_);
+      }
+      if (!metadata_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, metadata_);
+      }
+      if (!parentMetadata_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, parentMetadata_);
       }
       memoizedSize = size;
       return size;
     }
 
     private static final long serialVersionUID = 0L;
-    public static protos.Chaincode.ChaincodeIdentifier parseFrom(
+    public static protos.Chaincode.ChaincodeSecurityContext parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protos.Chaincode.ChaincodeIdentifier parseFrom(
+    public static protos.Chaincode.ChaincodeSecurityContext parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protos.Chaincode.ChaincodeIdentifier parseFrom(byte[] data)
+    public static protos.Chaincode.ChaincodeSecurityContext parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static protos.Chaincode.ChaincodeIdentifier parseFrom(
+    public static protos.Chaincode.ChaincodeSecurityContext parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static protos.Chaincode.ChaincodeIdentifier parseFrom(java.io.InputStream input)
+    public static protos.Chaincode.ChaincodeSecurityContext parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static protos.Chaincode.ChaincodeIdentifier parseFrom(
+    public static protos.Chaincode.ChaincodeSecurityContext parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static protos.Chaincode.ChaincodeIdentifier parseDelimitedFrom(java.io.InputStream input)
+    public static protos.Chaincode.ChaincodeSecurityContext parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static protos.Chaincode.ChaincodeIdentifier parseDelimitedFrom(
+    public static protos.Chaincode.ChaincodeSecurityContext parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static protos.Chaincode.ChaincodeIdentifier parseFrom(
+    public static protos.Chaincode.ChaincodeSecurityContext parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static protos.Chaincode.ChaincodeIdentifier parseFrom(
+    public static protos.Chaincode.ChaincodeSecurityContext parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4272,7 +4547,7 @@ public final class Chaincode {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(protos.Chaincode.ChaincodeIdentifier prototype) {
+    public static Builder newBuilder(protos.Chaincode.ChaincodeSecurityContext prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -4287,29 +4562,25 @@ public final class Chaincode {
       return builder;
     }
     /**
-     * Protobuf type {@code protos.ChaincodeIdentifier}
-     *
-     * <pre>
-     * TODO: Merge this with ChaincodeID.
-     * </pre>
+     * Protobuf type {@code protos.ChaincodeSecurityContext}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:protos.ChaincodeIdentifier)
-        protos.Chaincode.ChaincodeIdentifierOrBuilder {
+        // @@protoc_insertion_point(builder_implements:protos.ChaincodeSecurityContext)
+        protos.Chaincode.ChaincodeSecurityContextOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return protos.Chaincode.internal_static_protos_ChaincodeIdentifier_descriptor;
+        return protos.Chaincode.internal_static_protos_ChaincodeSecurityContext_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return protos.Chaincode.internal_static_protos_ChaincodeIdentifier_fieldAccessorTable
+        return protos.Chaincode.internal_static_protos_ChaincodeSecurityContext_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                protos.Chaincode.ChaincodeIdentifier.class, protos.Chaincode.ChaincodeIdentifier.Builder.class);
+                protos.Chaincode.ChaincodeSecurityContext.class, protos.Chaincode.ChaincodeSecurityContext.Builder.class);
       }
 
-      // Construct using protos.Chaincode.ChaincodeIdentifier.newBuilder()
+      // Construct using protos.Chaincode.ChaincodeSecurityContext.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -4325,49 +4596,78 @@ public final class Chaincode {
       }
       public Builder clear() {
         super.clear();
-        url_ = "";
+        callerCert_ = com.google.protobuf.ByteString.EMPTY;
+
+        callerSign_ = com.google.protobuf.ByteString.EMPTY;
+
+        payload_ = com.google.protobuf.ByteString.EMPTY;
+
+        binding_ = com.google.protobuf.ByteString.EMPTY;
+
+        metadata_ = com.google.protobuf.ByteString.EMPTY;
+
+        parentMetadata_ = com.google.protobuf.ByteString.EMPTY;
 
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return protos.Chaincode.internal_static_protos_ChaincodeIdentifier_descriptor;
+        return protos.Chaincode.internal_static_protos_ChaincodeSecurityContext_descriptor;
       }
 
-      public protos.Chaincode.ChaincodeIdentifier getDefaultInstanceForType() {
-        return protos.Chaincode.ChaincodeIdentifier.getDefaultInstance();
+      public protos.Chaincode.ChaincodeSecurityContext getDefaultInstanceForType() {
+        return protos.Chaincode.ChaincodeSecurityContext.getDefaultInstance();
       }
 
-      public protos.Chaincode.ChaincodeIdentifier build() {
-        protos.Chaincode.ChaincodeIdentifier result = buildPartial();
+      public protos.Chaincode.ChaincodeSecurityContext build() {
+        protos.Chaincode.ChaincodeSecurityContext result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public protos.Chaincode.ChaincodeIdentifier buildPartial() {
-        protos.Chaincode.ChaincodeIdentifier result = new protos.Chaincode.ChaincodeIdentifier(this);
-        result.url_ = url_;
+      public protos.Chaincode.ChaincodeSecurityContext buildPartial() {
+        protos.Chaincode.ChaincodeSecurityContext result = new protos.Chaincode.ChaincodeSecurityContext(this);
+        result.callerCert_ = callerCert_;
+        result.callerSign_ = callerSign_;
+        result.payload_ = payload_;
+        result.binding_ = binding_;
+        result.metadata_ = metadata_;
+        result.parentMetadata_ = parentMetadata_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof protos.Chaincode.ChaincodeIdentifier) {
-          return mergeFrom((protos.Chaincode.ChaincodeIdentifier)other);
+        if (other instanceof protos.Chaincode.ChaincodeSecurityContext) {
+          return mergeFrom((protos.Chaincode.ChaincodeSecurityContext)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(protos.Chaincode.ChaincodeIdentifier other) {
-        if (other == protos.Chaincode.ChaincodeIdentifier.getDefaultInstance()) return this;
-        if (!other.getUrl().isEmpty()) {
-          url_ = other.url_;
-          onChanged();
+      public Builder mergeFrom(protos.Chaincode.ChaincodeSecurityContext other) {
+        if (other == protos.Chaincode.ChaincodeSecurityContext.getDefaultInstance()) return this;
+        if (other.getCallerCert() != com.google.protobuf.ByteString.EMPTY) {
+          setCallerCert(other.getCallerCert());
+        }
+        if (other.getCallerSign() != com.google.protobuf.ByteString.EMPTY) {
+          setCallerSign(other.getCallerSign());
+        }
+        if (other.getPayload() != com.google.protobuf.ByteString.EMPTY) {
+          setPayload(other.getPayload());
+        }
+        if (other.getBinding() != com.google.protobuf.ByteString.EMPTY) {
+          setBinding(other.getBinding());
+        }
+        if (other.getMetadata() != com.google.protobuf.ByteString.EMPTY) {
+          setMetadata(other.getMetadata());
+        }
+        if (other.getParentMetadata() != com.google.protobuf.ByteString.EMPTY) {
+          setParentMetadata(other.getParentMetadata());
         }
         onChanged();
         return this;
@@ -4381,11 +4681,11 @@ public final class Chaincode {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        protos.Chaincode.ChaincodeIdentifier parsedMessage = null;
+        protos.Chaincode.ChaincodeSecurityContext parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (protos.Chaincode.ChaincodeIdentifier) e.getUnfinishedMessage();
+          parsedMessage = (protos.Chaincode.ChaincodeSecurityContext) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -4395,91 +4695,176 @@ public final class Chaincode {
         return this;
       }
 
-      private java.lang.Object url_ = "";
+      private com.google.protobuf.ByteString callerCert_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>optional string Url = 1;</code>
-       *
-       * <pre>
-       * URL for accessing the Chaincode, eg. https://github.com/user/SampleContract
-       * </pre>
+       * <code>optional bytes callerCert = 1;</code>
        */
-      public java.lang.String getUrl() {
-        java.lang.Object ref = url_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          url_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getCallerCert() {
+        return callerCert_;
       }
       /**
-       * <code>optional string Url = 1;</code>
-       *
-       * <pre>
-       * URL for accessing the Chaincode, eg. https://github.com/user/SampleContract
-       * </pre>
+       * <code>optional bytes callerCert = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getUrlBytes() {
-        java.lang.Object ref = url_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          url_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string Url = 1;</code>
-       *
-       * <pre>
-       * URL for accessing the Chaincode, eg. https://github.com/user/SampleContract
-       * </pre>
-       */
-      public Builder setUrl(
-          java.lang.String value) {
+      public Builder setCallerCert(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        url_ = value;
+        callerCert_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string Url = 1;</code>
-       *
-       * <pre>
-       * URL for accessing the Chaincode, eg. https://github.com/user/SampleContract
-       * </pre>
+       * <code>optional bytes callerCert = 1;</code>
        */
-      public Builder clearUrl() {
+      public Builder clearCallerCert() {
         
-        url_ = getDefaultInstance().getUrl();
+        callerCert_ = getDefaultInstance().getCallerCert();
         onChanged();
         return this;
       }
+
+      private com.google.protobuf.ByteString callerSign_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>optional string Url = 1;</code>
-       *
-       * <pre>
-       * URL for accessing the Chaincode, eg. https://github.com/user/SampleContract
-       * </pre>
+       * <code>optional bytes callerSign = 2;</code>
        */
-      public Builder setUrlBytes(
-          com.google.protobuf.ByteString value) {
+      public com.google.protobuf.ByteString getCallerSign() {
+        return callerSign_;
+      }
+      /**
+       * <code>optional bytes callerSign = 2;</code>
+       */
+      public Builder setCallerSign(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
+  
+        callerSign_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes callerSign = 2;</code>
+       */
+      public Builder clearCallerSign() {
         
-        url_ = value;
+        callerSign_ = getDefaultInstance().getCallerSign();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString payload_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes payload = 3;</code>
+       */
+      public com.google.protobuf.ByteString getPayload() {
+        return payload_;
+      }
+      /**
+       * <code>optional bytes payload = 3;</code>
+       */
+      public Builder setPayload(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        payload_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes payload = 3;</code>
+       */
+      public Builder clearPayload() {
+        
+        payload_ = getDefaultInstance().getPayload();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString binding_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes binding = 4;</code>
+       */
+      public com.google.protobuf.ByteString getBinding() {
+        return binding_;
+      }
+      /**
+       * <code>optional bytes binding = 4;</code>
+       */
+      public Builder setBinding(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        binding_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes binding = 4;</code>
+       */
+      public Builder clearBinding() {
+        
+        binding_ = getDefaultInstance().getBinding();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString metadata_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes metadata = 5;</code>
+       */
+      public com.google.protobuf.ByteString getMetadata() {
+        return metadata_;
+      }
+      /**
+       * <code>optional bytes metadata = 5;</code>
+       */
+      public Builder setMetadata(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        metadata_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes metadata = 5;</code>
+       */
+      public Builder clearMetadata() {
+        
+        metadata_ = getDefaultInstance().getMetadata();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString parentMetadata_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes parentMetadata = 6;</code>
+       */
+      public com.google.protobuf.ByteString getParentMetadata() {
+        return parentMetadata_;
+      }
+      /**
+       * <code>optional bytes parentMetadata = 6;</code>
+       */
+      public Builder setParentMetadata(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        parentMetadata_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes parentMetadata = 6;</code>
+       */
+      public Builder clearParentMetadata() {
+        
+        parentMetadata_ = getDefaultInstance().getParentMetadata();
         onChanged();
         return this;
       }
@@ -4494,27 +4879,27 @@ public final class Chaincode {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:protos.ChaincodeIdentifier)
+      // @@protoc_insertion_point(builder_scope:protos.ChaincodeSecurityContext)
     }
 
-    // @@protoc_insertion_point(class_scope:protos.ChaincodeIdentifier)
-    private static final protos.Chaincode.ChaincodeIdentifier DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:protos.ChaincodeSecurityContext)
+    private static final protos.Chaincode.ChaincodeSecurityContext DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new protos.Chaincode.ChaincodeIdentifier();
+      DEFAULT_INSTANCE = new protos.Chaincode.ChaincodeSecurityContext();
     }
 
-    public static protos.Chaincode.ChaincodeIdentifier getDefaultInstance() {
+    public static protos.Chaincode.ChaincodeSecurityContext getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<ChaincodeIdentifier>
-        PARSER = new com.google.protobuf.AbstractParser<ChaincodeIdentifier>() {
-      public ChaincodeIdentifier parsePartialFrom(
+    private static final com.google.protobuf.Parser<ChaincodeSecurityContext>
+        PARSER = new com.google.protobuf.AbstractParser<ChaincodeSecurityContext>() {
+      public ChaincodeSecurityContext parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         try {
-          return new ChaincodeIdentifier(input, extensionRegistry);
+          return new ChaincodeSecurityContext(input, extensionRegistry);
         } catch (RuntimeException e) {
           if (e.getCause() instanceof
               com.google.protobuf.InvalidProtocolBufferException) {
@@ -4526,1223 +4911,16 @@ public final class Chaincode {
       }
     };
 
-    public static com.google.protobuf.Parser<ChaincodeIdentifier> parser() {
+    public static com.google.protobuf.Parser<ChaincodeSecurityContext> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ChaincodeIdentifier> getParserForType() {
+    public com.google.protobuf.Parser<ChaincodeSecurityContext> getParserForType() {
       return PARSER;
     }
 
-    public protos.Chaincode.ChaincodeIdentifier getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ChaincodeRequestContextOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:protos.ChaincodeRequestContext)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-     */
-    boolean hasId();
-    /**
-     * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-     */
-    protos.Chaincode.ChaincodeIdentifier getId();
-    /**
-     * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-     */
-    protos.Chaincode.ChaincodeIdentifierOrBuilder getIdOrBuilder();
-  }
-  /**
-   * Protobuf type {@code protos.ChaincodeRequestContext}
-   *
-   * <pre>
-   * Used by the peer to identify the requesting chaincode and allows for proper
-   * access to state.
-   * </pre>
-   */
-  public  static final class ChaincodeRequestContext extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:protos.ChaincodeRequestContext)
-      ChaincodeRequestContextOrBuilder {
-    // Use ChaincodeRequestContext.newBuilder() to construct.
-    private ChaincodeRequestContext(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private ChaincodeRequestContext() {
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private ChaincodeRequestContext(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              protos.Chaincode.ChaincodeIdentifier.Builder subBuilder = null;
-              if (id_ != null) {
-                subBuilder = id_.toBuilder();
-              }
-              id_ = input.readMessage(protos.Chaincode.ChaincodeIdentifier.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(id_);
-                id_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
-      } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return protos.Chaincode.internal_static_protos_ChaincodeRequestContext_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return protos.Chaincode.internal_static_protos_ChaincodeRequestContext_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protos.Chaincode.ChaincodeRequestContext.class, protos.Chaincode.ChaincodeRequestContext.Builder.class);
-    }
-
-    public static final int ID_FIELD_NUMBER = 1;
-    private protos.Chaincode.ChaincodeIdentifier id_;
-    /**
-     * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-     */
-    public boolean hasId() {
-      return id_ != null;
-    }
-    /**
-     * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-     */
-    public protos.Chaincode.ChaincodeIdentifier getId() {
-      return id_ == null ? protos.Chaincode.ChaincodeIdentifier.getDefaultInstance() : id_;
-    }
-    /**
-     * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-     */
-    public protos.Chaincode.ChaincodeIdentifierOrBuilder getIdOrBuilder() {
-      return getId();
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (id_ != null) {
-        output.writeMessage(1, getId());
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (id_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getId());
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    public static protos.Chaincode.ChaincodeRequestContext parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static protos.Chaincode.ChaincodeRequestContext parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static protos.Chaincode.ChaincodeRequestContext parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static protos.Chaincode.ChaincodeRequestContext parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static protos.Chaincode.ChaincodeRequestContext parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static protos.Chaincode.ChaincodeRequestContext parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static protos.Chaincode.ChaincodeRequestContext parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static protos.Chaincode.ChaincodeRequestContext parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static protos.Chaincode.ChaincodeRequestContext parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static protos.Chaincode.ChaincodeRequestContext parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(protos.Chaincode.ChaincodeRequestContext prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code protos.ChaincodeRequestContext}
-     *
-     * <pre>
-     * Used by the peer to identify the requesting chaincode and allows for proper
-     * access to state.
-     * </pre>
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:protos.ChaincodeRequestContext)
-        protos.Chaincode.ChaincodeRequestContextOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return protos.Chaincode.internal_static_protos_ChaincodeRequestContext_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return protos.Chaincode.internal_static_protos_ChaincodeRequestContext_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protos.Chaincode.ChaincodeRequestContext.class, protos.Chaincode.ChaincodeRequestContext.Builder.class);
-      }
-
-      // Construct using protos.Chaincode.ChaincodeRequestContext.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        if (idBuilder_ == null) {
-          id_ = null;
-        } else {
-          id_ = null;
-          idBuilder_ = null;
-        }
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return protos.Chaincode.internal_static_protos_ChaincodeRequestContext_descriptor;
-      }
-
-      public protos.Chaincode.ChaincodeRequestContext getDefaultInstanceForType() {
-        return protos.Chaincode.ChaincodeRequestContext.getDefaultInstance();
-      }
-
-      public protos.Chaincode.ChaincodeRequestContext build() {
-        protos.Chaincode.ChaincodeRequestContext result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public protos.Chaincode.ChaincodeRequestContext buildPartial() {
-        protos.Chaincode.ChaincodeRequestContext result = new protos.Chaincode.ChaincodeRequestContext(this);
-        if (idBuilder_ == null) {
-          result.id_ = id_;
-        } else {
-          result.id_ = idBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof protos.Chaincode.ChaincodeRequestContext) {
-          return mergeFrom((protos.Chaincode.ChaincodeRequestContext)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(protos.Chaincode.ChaincodeRequestContext other) {
-        if (other == protos.Chaincode.ChaincodeRequestContext.getDefaultInstance()) return this;
-        if (other.hasId()) {
-          mergeId(other.getId());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        protos.Chaincode.ChaincodeRequestContext parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (protos.Chaincode.ChaincodeRequestContext) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private protos.Chaincode.ChaincodeIdentifier id_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
-          protos.Chaincode.ChaincodeIdentifier, protos.Chaincode.ChaincodeIdentifier.Builder, protos.Chaincode.ChaincodeIdentifierOrBuilder> idBuilder_;
-      /**
-       * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-       */
-      public boolean hasId() {
-        return idBuilder_ != null || id_ != null;
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-       */
-      public protos.Chaincode.ChaincodeIdentifier getId() {
-        if (idBuilder_ == null) {
-          return id_ == null ? protos.Chaincode.ChaincodeIdentifier.getDefaultInstance() : id_;
-        } else {
-          return idBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-       */
-      public Builder setId(protos.Chaincode.ChaincodeIdentifier value) {
-        if (idBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          id_ = value;
-          onChanged();
-        } else {
-          idBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-       */
-      public Builder setId(
-          protos.Chaincode.ChaincodeIdentifier.Builder builderForValue) {
-        if (idBuilder_ == null) {
-          id_ = builderForValue.build();
-          onChanged();
-        } else {
-          idBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-       */
-      public Builder mergeId(protos.Chaincode.ChaincodeIdentifier value) {
-        if (idBuilder_ == null) {
-          if (id_ != null) {
-            id_ =
-              protos.Chaincode.ChaincodeIdentifier.newBuilder(id_).mergeFrom(value).buildPartial();
-          } else {
-            id_ = value;
-          }
-          onChanged();
-        } else {
-          idBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-       */
-      public Builder clearId() {
-        if (idBuilder_ == null) {
-          id_ = null;
-          onChanged();
-        } else {
-          id_ = null;
-          idBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-       */
-      public protos.Chaincode.ChaincodeIdentifier.Builder getIdBuilder() {
-        
-        onChanged();
-        return getIdFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-       */
-      public protos.Chaincode.ChaincodeIdentifierOrBuilder getIdOrBuilder() {
-        if (idBuilder_ != null) {
-          return idBuilder_.getMessageOrBuilder();
-        } else {
-          return id_ == null ?
-              protos.Chaincode.ChaincodeIdentifier.getDefaultInstance() : id_;
-        }
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier Id = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          protos.Chaincode.ChaincodeIdentifier, protos.Chaincode.ChaincodeIdentifier.Builder, protos.Chaincode.ChaincodeIdentifierOrBuilder> 
-          getIdFieldBuilder() {
-        if (idBuilder_ == null) {
-          idBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              protos.Chaincode.ChaincodeIdentifier, protos.Chaincode.ChaincodeIdentifier.Builder, protos.Chaincode.ChaincodeIdentifierOrBuilder>(
-                  getId(),
-                  getParentForChildren(),
-                  isClean());
-          id_ = null;
-        }
-        return idBuilder_;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:protos.ChaincodeRequestContext)
-    }
-
-    // @@protoc_insertion_point(class_scope:protos.ChaincodeRequestContext)
-    private static final protos.Chaincode.ChaincodeRequestContext DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new protos.Chaincode.ChaincodeRequestContext();
-    }
-
-    public static protos.Chaincode.ChaincodeRequestContext getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ChaincodeRequestContext>
-        PARSER = new com.google.protobuf.AbstractParser<ChaincodeRequestContext>() {
-      public ChaincodeRequestContext parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
-          return new ChaincodeRequestContext(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
-      }
-    };
-
-    public static com.google.protobuf.Parser<ChaincodeRequestContext> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ChaincodeRequestContext> getParserForType() {
-      return PARSER;
-    }
-
-    public protos.Chaincode.ChaincodeRequestContext getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ChaincodeExecutionContextOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:protos.ChaincodeExecutionContext)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-     */
-    boolean hasChaincodeId();
-    /**
-     * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-     */
-    protos.Chaincode.ChaincodeIdentifier getChaincodeId();
-    /**
-     * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-     */
-    protos.Chaincode.ChaincodeIdentifierOrBuilder getChaincodeIdOrBuilder();
-
-    /**
-     * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-     */
-    boolean hasTimestamp();
-    /**
-     * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-     */
-    com.google.protobuf.Timestamp getTimestamp();
-    /**
-     * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-     */
-    com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder();
-  }
-  /**
-   * Protobuf type {@code protos.ChaincodeExecutionContext}
-   *
-   * <pre>
-   * Provided by the peer to the chaincode to identify the requesting chaincode
-   * and allow for proper access to state.
-   * </pre>
-   */
-  public  static final class ChaincodeExecutionContext extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:protos.ChaincodeExecutionContext)
-      ChaincodeExecutionContextOrBuilder {
-    // Use ChaincodeExecutionContext.newBuilder() to construct.
-    private ChaincodeExecutionContext(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-    }
-    private ChaincodeExecutionContext() {
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private ChaincodeExecutionContext(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry) {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              protos.Chaincode.ChaincodeIdentifier.Builder subBuilder = null;
-              if (chaincodeId_ != null) {
-                subBuilder = chaincodeId_.toBuilder();
-              }
-              chaincodeId_ = input.readMessage(protos.Chaincode.ChaincodeIdentifier.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(chaincodeId_);
-                chaincodeId_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 18: {
-              com.google.protobuf.Timestamp.Builder subBuilder = null;
-              if (timestamp_ != null) {
-                subBuilder = timestamp_.toBuilder();
-              }
-              timestamp_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(timestamp_);
-                timestamp_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw new RuntimeException(e.setUnfinishedMessage(this));
-      } catch (java.io.IOException e) {
-        throw new RuntimeException(
-            new com.google.protobuf.InvalidProtocolBufferException(
-                e.getMessage()).setUnfinishedMessage(this));
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return protos.Chaincode.internal_static_protos_ChaincodeExecutionContext_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return protos.Chaincode.internal_static_protos_ChaincodeExecutionContext_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              protos.Chaincode.ChaincodeExecutionContext.class, protos.Chaincode.ChaincodeExecutionContext.Builder.class);
-    }
-
-    public static final int CHAINCODEID_FIELD_NUMBER = 1;
-    private protos.Chaincode.ChaincodeIdentifier chaincodeId_;
-    /**
-     * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-     */
-    public boolean hasChaincodeId() {
-      return chaincodeId_ != null;
-    }
-    /**
-     * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-     */
-    public protos.Chaincode.ChaincodeIdentifier getChaincodeId() {
-      return chaincodeId_ == null ? protos.Chaincode.ChaincodeIdentifier.getDefaultInstance() : chaincodeId_;
-    }
-    /**
-     * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-     */
-    public protos.Chaincode.ChaincodeIdentifierOrBuilder getChaincodeIdOrBuilder() {
-      return getChaincodeId();
-    }
-
-    public static final int TIMESTAMP_FIELD_NUMBER = 2;
-    private com.google.protobuf.Timestamp timestamp_;
-    /**
-     * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-     */
-    public boolean hasTimestamp() {
-      return timestamp_ != null;
-    }
-    /**
-     * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-     */
-    public com.google.protobuf.Timestamp getTimestamp() {
-      return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
-    }
-    /**
-     * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-     */
-    public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
-      return getTimestamp();
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (chaincodeId_ != null) {
-        output.writeMessage(1, getChaincodeId());
-      }
-      if (timestamp_ != null) {
-        output.writeMessage(2, getTimestamp());
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (chaincodeId_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getChaincodeId());
-      }
-      if (timestamp_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getTimestamp());
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    public static protos.Chaincode.ChaincodeExecutionContext parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static protos.Chaincode.ChaincodeExecutionContext parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static protos.Chaincode.ChaincodeExecutionContext parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static protos.Chaincode.ChaincodeExecutionContext parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static protos.Chaincode.ChaincodeExecutionContext parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static protos.Chaincode.ChaincodeExecutionContext parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static protos.Chaincode.ChaincodeExecutionContext parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static protos.Chaincode.ChaincodeExecutionContext parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static protos.Chaincode.ChaincodeExecutionContext parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static protos.Chaincode.ChaincodeExecutionContext parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(protos.Chaincode.ChaincodeExecutionContext prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code protos.ChaincodeExecutionContext}
-     *
-     * <pre>
-     * Provided by the peer to the chaincode to identify the requesting chaincode
-     * and allow for proper access to state.
-     * </pre>
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:protos.ChaincodeExecutionContext)
-        protos.Chaincode.ChaincodeExecutionContextOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return protos.Chaincode.internal_static_protos_ChaincodeExecutionContext_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return protos.Chaincode.internal_static_protos_ChaincodeExecutionContext_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                protos.Chaincode.ChaincodeExecutionContext.class, protos.Chaincode.ChaincodeExecutionContext.Builder.class);
-      }
-
-      // Construct using protos.Chaincode.ChaincodeExecutionContext.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        if (chaincodeIdBuilder_ == null) {
-          chaincodeId_ = null;
-        } else {
-          chaincodeId_ = null;
-          chaincodeIdBuilder_ = null;
-        }
-        if (timestampBuilder_ == null) {
-          timestamp_ = null;
-        } else {
-          timestamp_ = null;
-          timestampBuilder_ = null;
-        }
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return protos.Chaincode.internal_static_protos_ChaincodeExecutionContext_descriptor;
-      }
-
-      public protos.Chaincode.ChaincodeExecutionContext getDefaultInstanceForType() {
-        return protos.Chaincode.ChaincodeExecutionContext.getDefaultInstance();
-      }
-
-      public protos.Chaincode.ChaincodeExecutionContext build() {
-        protos.Chaincode.ChaincodeExecutionContext result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public protos.Chaincode.ChaincodeExecutionContext buildPartial() {
-        protos.Chaincode.ChaincodeExecutionContext result = new protos.Chaincode.ChaincodeExecutionContext(this);
-        if (chaincodeIdBuilder_ == null) {
-          result.chaincodeId_ = chaincodeId_;
-        } else {
-          result.chaincodeId_ = chaincodeIdBuilder_.build();
-        }
-        if (timestampBuilder_ == null) {
-          result.timestamp_ = timestamp_;
-        } else {
-          result.timestamp_ = timestampBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof protos.Chaincode.ChaincodeExecutionContext) {
-          return mergeFrom((protos.Chaincode.ChaincodeExecutionContext)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(protos.Chaincode.ChaincodeExecutionContext other) {
-        if (other == protos.Chaincode.ChaincodeExecutionContext.getDefaultInstance()) return this;
-        if (other.hasChaincodeId()) {
-          mergeChaincodeId(other.getChaincodeId());
-        }
-        if (other.hasTimestamp()) {
-          mergeTimestamp(other.getTimestamp());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        protos.Chaincode.ChaincodeExecutionContext parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (protos.Chaincode.ChaincodeExecutionContext) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private protos.Chaincode.ChaincodeIdentifier chaincodeId_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
-          protos.Chaincode.ChaincodeIdentifier, protos.Chaincode.ChaincodeIdentifier.Builder, protos.Chaincode.ChaincodeIdentifierOrBuilder> chaincodeIdBuilder_;
-      /**
-       * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-       */
-      public boolean hasChaincodeId() {
-        return chaincodeIdBuilder_ != null || chaincodeId_ != null;
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-       */
-      public protos.Chaincode.ChaincodeIdentifier getChaincodeId() {
-        if (chaincodeIdBuilder_ == null) {
-          return chaincodeId_ == null ? protos.Chaincode.ChaincodeIdentifier.getDefaultInstance() : chaincodeId_;
-        } else {
-          return chaincodeIdBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-       */
-      public Builder setChaincodeId(protos.Chaincode.ChaincodeIdentifier value) {
-        if (chaincodeIdBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          chaincodeId_ = value;
-          onChanged();
-        } else {
-          chaincodeIdBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-       */
-      public Builder setChaincodeId(
-          protos.Chaincode.ChaincodeIdentifier.Builder builderForValue) {
-        if (chaincodeIdBuilder_ == null) {
-          chaincodeId_ = builderForValue.build();
-          onChanged();
-        } else {
-          chaincodeIdBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-       */
-      public Builder mergeChaincodeId(protos.Chaincode.ChaincodeIdentifier value) {
-        if (chaincodeIdBuilder_ == null) {
-          if (chaincodeId_ != null) {
-            chaincodeId_ =
-              protos.Chaincode.ChaincodeIdentifier.newBuilder(chaincodeId_).mergeFrom(value).buildPartial();
-          } else {
-            chaincodeId_ = value;
-          }
-          onChanged();
-        } else {
-          chaincodeIdBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-       */
-      public Builder clearChaincodeId() {
-        if (chaincodeIdBuilder_ == null) {
-          chaincodeId_ = null;
-          onChanged();
-        } else {
-          chaincodeId_ = null;
-          chaincodeIdBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-       */
-      public protos.Chaincode.ChaincodeIdentifier.Builder getChaincodeIdBuilder() {
-        
-        onChanged();
-        return getChaincodeIdFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-       */
-      public protos.Chaincode.ChaincodeIdentifierOrBuilder getChaincodeIdOrBuilder() {
-        if (chaincodeIdBuilder_ != null) {
-          return chaincodeIdBuilder_.getMessageOrBuilder();
-        } else {
-          return chaincodeId_ == null ?
-              protos.Chaincode.ChaincodeIdentifier.getDefaultInstance() : chaincodeId_;
-        }
-      }
-      /**
-       * <code>optional .protos.ChaincodeIdentifier ChaincodeId = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          protos.Chaincode.ChaincodeIdentifier, protos.Chaincode.ChaincodeIdentifier.Builder, protos.Chaincode.ChaincodeIdentifierOrBuilder> 
-          getChaincodeIdFieldBuilder() {
-        if (chaincodeIdBuilder_ == null) {
-          chaincodeIdBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              protos.Chaincode.ChaincodeIdentifier, protos.Chaincode.ChaincodeIdentifier.Builder, protos.Chaincode.ChaincodeIdentifierOrBuilder>(
-                  getChaincodeId(),
-                  getParentForChildren(),
-                  isClean());
-          chaincodeId_ = null;
-        }
-        return chaincodeIdBuilder_;
-      }
-
-      private com.google.protobuf.Timestamp timestamp_ = null;
-      private com.google.protobuf.SingleFieldBuilder<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timestampBuilder_;
-      /**
-       * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-       */
-      public boolean hasTimestamp() {
-        return timestampBuilder_ != null || timestamp_ != null;
-      }
-      /**
-       * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-       */
-      public com.google.protobuf.Timestamp getTimestamp() {
-        if (timestampBuilder_ == null) {
-          return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
-        } else {
-          return timestampBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-       */
-      public Builder setTimestamp(com.google.protobuf.Timestamp value) {
-        if (timestampBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          timestamp_ = value;
-          onChanged();
-        } else {
-          timestampBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-       */
-      public Builder setTimestamp(
-          com.google.protobuf.Timestamp.Builder builderForValue) {
-        if (timestampBuilder_ == null) {
-          timestamp_ = builderForValue.build();
-          onChanged();
-        } else {
-          timestampBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-       */
-      public Builder mergeTimestamp(com.google.protobuf.Timestamp value) {
-        if (timestampBuilder_ == null) {
-          if (timestamp_ != null) {
-            timestamp_ =
-              com.google.protobuf.Timestamp.newBuilder(timestamp_).mergeFrom(value).buildPartial();
-          } else {
-            timestamp_ = value;
-          }
-          onChanged();
-        } else {
-          timestampBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-       */
-      public Builder clearTimestamp() {
-        if (timestampBuilder_ == null) {
-          timestamp_ = null;
-          onChanged();
-        } else {
-          timestamp_ = null;
-          timestampBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-       */
-      public com.google.protobuf.Timestamp.Builder getTimestampBuilder() {
-        
-        onChanged();
-        return getTimestampFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-       */
-      public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
-        if (timestampBuilder_ != null) {
-          return timestampBuilder_.getMessageOrBuilder();
-        } else {
-          return timestamp_ == null ?
-              com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
-        }
-      }
-      /**
-       * <code>optional .google.protobuf.Timestamp Timestamp = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-          getTimestampFieldBuilder() {
-        if (timestampBuilder_ == null) {
-          timestampBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                  getTimestamp(),
-                  getParentForChildren(),
-                  isClean());
-          timestamp_ = null;
-        }
-        return timestampBuilder_;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:protos.ChaincodeExecutionContext)
-    }
-
-    // @@protoc_insertion_point(class_scope:protos.ChaincodeExecutionContext)
-    private static final protos.Chaincode.ChaincodeExecutionContext DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new protos.Chaincode.ChaincodeExecutionContext();
-    }
-
-    public static protos.Chaincode.ChaincodeExecutionContext getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ChaincodeExecutionContext>
-        PARSER = new com.google.protobuf.AbstractParser<ChaincodeExecutionContext>() {
-      public ChaincodeExecutionContext parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        try {
-          return new ChaincodeExecutionContext(input, extensionRegistry);
-        } catch (RuntimeException e) {
-          if (e.getCause() instanceof
-              com.google.protobuf.InvalidProtocolBufferException) {
-            throw (com.google.protobuf.InvalidProtocolBufferException)
-                e.getCause();
-          }
-          throw e;
-        }
-      }
-    };
-
-    public static com.google.protobuf.Parser<ChaincodeExecutionContext> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ChaincodeExecutionContext> getParserForType() {
-      return PARSER;
-    }
-
-    public protos.Chaincode.ChaincodeExecutionContext getDefaultInstanceForType() {
+    public protos.Chaincode.ChaincodeSecurityContext getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -5788,6 +4966,19 @@ public final class Chaincode {
      */
     com.google.protobuf.ByteString
         getUuidBytes();
+
+    /**
+     * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+     */
+    boolean hasSecurityContext();
+    /**
+     * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+     */
+    protos.Chaincode.ChaincodeSecurityContext getSecurityContext();
+    /**
+     * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+     */
+    protos.Chaincode.ChaincodeSecurityContextOrBuilder getSecurityContextOrBuilder();
   }
   /**
    * Protobuf type {@code protos.ChaincodeMessage}
@@ -5858,6 +5049,19 @@ public final class Chaincode {
               java.lang.String s = input.readStringRequireUtf8();
 
               uuid_ = s;
+              break;
+            }
+            case 42: {
+              protos.Chaincode.ChaincodeSecurityContext.Builder subBuilder = null;
+              if (securityContext_ != null) {
+                subBuilder = securityContext_.toBuilder();
+              }
+              securityContext_ = input.readMessage(protos.Chaincode.ChaincodeSecurityContext.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(securityContext_);
+                securityContext_ = subBuilder.buildPartial();
+              }
+
               break;
             }
           }
@@ -6218,6 +5422,27 @@ public final class Chaincode {
       }
     }
 
+    public static final int SECURITYCONTEXT_FIELD_NUMBER = 5;
+    private protos.Chaincode.ChaincodeSecurityContext securityContext_;
+    /**
+     * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+     */
+    public boolean hasSecurityContext() {
+      return securityContext_ != null;
+    }
+    /**
+     * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+     */
+    public protos.Chaincode.ChaincodeSecurityContext getSecurityContext() {
+      return securityContext_ == null ? protos.Chaincode.ChaincodeSecurityContext.getDefaultInstance() : securityContext_;
+    }
+    /**
+     * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+     */
+    public protos.Chaincode.ChaincodeSecurityContextOrBuilder getSecurityContextOrBuilder() {
+      return getSecurityContext();
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -6242,6 +5467,9 @@ public final class Chaincode {
       if (!getUuidBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessage.writeString(output, 4, uuid_);
       }
+      if (securityContext_ != null) {
+        output.writeMessage(5, getSecurityContext());
+      }
     }
 
     public int getSerializedSize() {
@@ -6263,6 +5491,10 @@ public final class Chaincode {
       }
       if (!getUuidBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(4, uuid_);
+      }
+      if (securityContext_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getSecurityContext());
       }
       memoizedSize = size;
       return size;
@@ -6387,6 +5619,12 @@ public final class Chaincode {
 
         uuid_ = "";
 
+        if (securityContextBuilder_ == null) {
+          securityContext_ = null;
+        } else {
+          securityContext_ = null;
+          securityContextBuilder_ = null;
+        }
         return this;
       }
 
@@ -6417,6 +5655,11 @@ public final class Chaincode {
         }
         result.payload_ = payload_;
         result.uuid_ = uuid_;
+        if (securityContextBuilder_ == null) {
+          result.securityContext_ = securityContext_;
+        } else {
+          result.securityContext_ = securityContextBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -6444,6 +5687,9 @@ public final class Chaincode {
         if (!other.getUuid().isEmpty()) {
           uuid_ = other.uuid_;
           onChanged();
+        }
+        if (other.hasSecurityContext()) {
+          mergeSecurityContext(other.getSecurityContext());
         }
         onChanged();
         return this;
@@ -6728,6 +5974,123 @@ public final class Chaincode {
         uuid_ = value;
         onChanged();
         return this;
+      }
+
+      private protos.Chaincode.ChaincodeSecurityContext securityContext_ = null;
+      private com.google.protobuf.SingleFieldBuilder<
+          protos.Chaincode.ChaincodeSecurityContext, protos.Chaincode.ChaincodeSecurityContext.Builder, protos.Chaincode.ChaincodeSecurityContextOrBuilder> securityContextBuilder_;
+      /**
+       * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+       */
+      public boolean hasSecurityContext() {
+        return securityContextBuilder_ != null || securityContext_ != null;
+      }
+      /**
+       * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+       */
+      public protos.Chaincode.ChaincodeSecurityContext getSecurityContext() {
+        if (securityContextBuilder_ == null) {
+          return securityContext_ == null ? protos.Chaincode.ChaincodeSecurityContext.getDefaultInstance() : securityContext_;
+        } else {
+          return securityContextBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+       */
+      public Builder setSecurityContext(protos.Chaincode.ChaincodeSecurityContext value) {
+        if (securityContextBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          securityContext_ = value;
+          onChanged();
+        } else {
+          securityContextBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+       */
+      public Builder setSecurityContext(
+          protos.Chaincode.ChaincodeSecurityContext.Builder builderForValue) {
+        if (securityContextBuilder_ == null) {
+          securityContext_ = builderForValue.build();
+          onChanged();
+        } else {
+          securityContextBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+       */
+      public Builder mergeSecurityContext(protos.Chaincode.ChaincodeSecurityContext value) {
+        if (securityContextBuilder_ == null) {
+          if (securityContext_ != null) {
+            securityContext_ =
+              protos.Chaincode.ChaincodeSecurityContext.newBuilder(securityContext_).mergeFrom(value).buildPartial();
+          } else {
+            securityContext_ = value;
+          }
+          onChanged();
+        } else {
+          securityContextBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+       */
+      public Builder clearSecurityContext() {
+        if (securityContextBuilder_ == null) {
+          securityContext_ = null;
+          onChanged();
+        } else {
+          securityContext_ = null;
+          securityContextBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+       */
+      public protos.Chaincode.ChaincodeSecurityContext.Builder getSecurityContextBuilder() {
+        
+        onChanged();
+        return getSecurityContextFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+       */
+      public protos.Chaincode.ChaincodeSecurityContextOrBuilder getSecurityContextOrBuilder() {
+        if (securityContextBuilder_ != null) {
+          return securityContextBuilder_.getMessageOrBuilder();
+        } else {
+          return securityContext_ == null ?
+              protos.Chaincode.ChaincodeSecurityContext.getDefaultInstance() : securityContext_;
+        }
+      }
+      /**
+       * <code>optional .protos.ChaincodeSecurityContext securityContext = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          protos.Chaincode.ChaincodeSecurityContext, protos.Chaincode.ChaincodeSecurityContext.Builder, protos.Chaincode.ChaincodeSecurityContextOrBuilder> 
+          getSecurityContextFieldBuilder() {
+        if (securityContextBuilder_ == null) {
+          securityContextBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              protos.Chaincode.ChaincodeSecurityContext, protos.Chaincode.ChaincodeSecurityContext.Builder, protos.Chaincode.ChaincodeSecurityContextOrBuilder>(
+                  getSecurityContext(),
+                  getParentForChildren(),
+                  isClean());
+          securityContext_ = null;
+        }
+        return securityContextBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -10188,20 +9551,10 @@ public final class Chaincode {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_protos_ChaincodeInvocationSpec_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_protos_ChaincodeIdentifier_descriptor;
+    internal_static_protos_ChaincodeSecurityContext_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_protos_ChaincodeIdentifier_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_protos_ChaincodeRequestContext_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_protos_ChaincodeRequestContext_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_protos_ChaincodeExecutionContext_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_protos_ChaincodeExecutionContext_fieldAccessorTable;
+      internal_static_protos_ChaincodeSecurityContext_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_protos_ChaincodeMessage_descriptor;
   private static
@@ -10249,53 +9602,53 @@ public final class Chaincode {
       "\n\017chaincode.proto\022\006protos\032\037google/protob" +
       "uf/timestamp.proto\")\n\013ChaincodeID\022\014\n\004pat" +
       "h\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\"0\n\016ChaincodeInput\022" +
-      "\020\n\010function\030\001 \001(\t\022\014\n\004args\030\002 \003(\t\"\257\002\n\rChai" +
+      "\020\n\010function\030\001 \001(\t\022\014\n\004args\030\002 \003(\t\"\270\002\n\rChai" +
       "ncodeSpec\022(\n\004type\030\001 \001(\0162\032.protos.Chainco" +
       "deSpec.Type\022(\n\013chaincodeID\030\002 \001(\0132\023.proto" +
       "s.ChaincodeID\022\'\n\007ctorMsg\030\003 \001(\0132\026.protos." +
       "ChaincodeInput\022\017\n\007timeout\030\004 \001(\005\022\025\n\rsecur" +
       "eContext\030\005 \001(\t\022:\n\024confidentialityLevel\030\006" +
       " \001(\0162\034.protos.ConfidentialityLevel\022\020\n\010me",
-      "tadata\030\007 \001(\014\"+\n\004Type\022\r\n\tUNDEFINED\020\000\022\n\n\006G" +
-      "OLANG\020\001\022\010\n\004NODE\020\002\"\217\001\n\027ChaincodeDeploymen" +
-      "tSpec\022,\n\rchaincodeSpec\030\001 \001(\0132\025.protos.Ch" +
-      "aincodeSpec\0221\n\reffectiveDate\030\002 \001(\0132\032.goo" +
-      "gle.protobuf.Timestamp\022\023\n\013codePackage\030\003 " +
-      "\001(\014\"G\n\027ChaincodeInvocationSpec\022,\n\rchainc" +
-      "odeSpec\030\001 \001(\0132\025.protos.ChaincodeSpec\"\"\n\023" +
-      "ChaincodeIdentifier\022\013\n\003Url\030\001 \001(\t\"B\n\027Chai" +
-      "ncodeRequestContext\022\'\n\002Id\030\001 \001(\0132\033.protos" +
-      ".ChaincodeIdentifier\"|\n\031ChaincodeExecuti",
-      "onContext\0220\n\013ChaincodeId\030\001 \001(\0132\033.protos." +
-      "ChaincodeIdentifier\022-\n\tTimestamp\030\002 \001(\0132\032" +
-      ".google.protobuf.Timestamp\"\347\003\n\020Chaincode" +
-      "Message\022+\n\004type\030\001 \001(\0162\035.protos.Chaincode" +
-      "Message.Type\022-\n\ttimestamp\030\002 \001(\0132\032.google" +
-      ".protobuf.Timestamp\022\017\n\007payload\030\003 \001(\014\022\014\n\004" +
-      "uuid\030\004 \001(\t\"\327\002\n\004Type\022\r\n\tUNDEFINED\020\000\022\014\n\010RE" +
-      "GISTER\020\001\022\016\n\nREGISTERED\020\002\022\010\n\004INIT\020\003\022\t\n\005RE" +
-      "ADY\020\004\022\017\n\013TRANSACTION\020\005\022\r\n\tCOMPLETED\020\006\022\t\n" +
-      "\005ERROR\020\007\022\r\n\tGET_STATE\020\010\022\r\n\tPUT_STATE\020\t\022\r",
-      "\n\tDEL_STATE\020\n\022\024\n\020INVOKE_CHAINCODE\020\013\022\020\n\014I" +
-      "NVOKE_QUERY\020\014\022\014\n\010RESPONSE\020\r\022\t\n\005QUERY\020\016\022\023" +
-      "\n\017QUERY_COMPLETED\020\017\022\017\n\013QUERY_ERROR\020\020\022\025\n\021" +
-      "RANGE_QUERY_STATE\020\021\022\032\n\026RANGE_QUERY_STATE" +
-      "_NEXT\020\022\022\033\n\027RANGE_QUERY_STATE_CLOSE\020\023\"*\n\014" +
-      "PutStateInfo\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\014" +
-      "\"3\n\017RangeQueryState\022\020\n\010startKey\030\001 \001(\t\022\016\n" +
-      "\006endKey\030\002 \001(\t\"!\n\023RangeQueryStateNext\022\n\n\002" +
-      "ID\030\001 \001(\t\"\"\n\024RangeQueryStateClose\022\n\n\002ID\030\001" +
-      " \001(\t\"5\n\027RangeQueryStateKeyValue\022\013\n\003key\030\001",
-      " \001(\t\022\r\n\005value\030\002 \001(\014\"n\n\027RangeQueryStateRe" +
-      "sponse\0226\n\rkeysAndValues\030\001 \003(\0132\037.protos.R" +
-      "angeQueryStateKeyValue\022\017\n\007hasMore\030\002 \001(\010\022" +
-      "\n\n\002ID\030\003 \001(\t*4\n\024ConfidentialityLevel\022\n\n\006P" +
-      "UBLIC\020\000\022\020\n\014CONFIDENTIAL\020\0012\265\001\n\020ChaincodeS" +
-      "upport\022[\n\023GetExecutionContext\022\037.protos.C" +
-      "haincodeRequestContext\032!.protos.Chaincod" +
-      "eExecutionContext\"\000\022D\n\010Register\022\030.protos" +
-      ".ChaincodeMessage\032\030.protos.ChaincodeMess" +
-      "age\"\000(\0010\001b\006proto3"
+      "tadata\030\007 \001(\014\"4\n\004Type\022\r\n\tUNDEFINED\020\000\022\n\n\006G" +
+      "OLANG\020\001\022\010\n\004NODE\020\002\022\007\n\003CAR\020\003\"\206\002\n\027Chaincode" +
+      "DeploymentSpec\022,\n\rchaincodeSpec\030\001 \001(\0132\025." +
+      "protos.ChaincodeSpec\0221\n\reffectiveDate\030\002 " +
+      "\001(\0132\032.google.protobuf.Timestamp\022\023\n\013codeP" +
+      "ackage\030\003 \001(\014\022E\n\007execEnv\030\004 \001(\01624.protos.C" +
+      "haincodeDeploymentSpec.ExecutionEnvironm" +
+      "ent\".\n\024ExecutionEnvironment\022\n\n\006DOCKER\020\000\022" +
+      "\n\n\006SYSTEM\020\001\"G\n\027ChaincodeInvocationSpec\022," +
+      "\n\rchaincodeSpec\030\001 \001(\0132\025.protos.Chaincode",
+      "Spec\"\216\001\n\030ChaincodeSecurityContext\022\022\n\ncal" +
+      "lerCert\030\001 \001(\014\022\022\n\ncallerSign\030\002 \001(\014\022\017\n\007pay" +
+      "load\030\003 \001(\014\022\017\n\007binding\030\004 \001(\014\022\020\n\010metadata\030" +
+      "\005 \001(\014\022\026\n\016parentMetadata\030\006 \001(\014\"\242\004\n\020Chainc" +
+      "odeMessage\022+\n\004type\030\001 \001(\0162\035.protos.Chainc" +
+      "odeMessage.Type\022-\n\ttimestamp\030\002 \001(\0132\032.goo" +
+      "gle.protobuf.Timestamp\022\017\n\007payload\030\003 \001(\014\022" +
+      "\014\n\004uuid\030\004 \001(\t\0229\n\017securityContext\030\005 \001(\0132 " +
+      ".protos.ChaincodeSecurityContext\"\327\002\n\004Typ" +
+      "e\022\r\n\tUNDEFINED\020\000\022\014\n\010REGISTER\020\001\022\016\n\nREGIST",
+      "ERED\020\002\022\010\n\004INIT\020\003\022\t\n\005READY\020\004\022\017\n\013TRANSACTI" +
+      "ON\020\005\022\r\n\tCOMPLETED\020\006\022\t\n\005ERROR\020\007\022\r\n\tGET_ST" +
+      "ATE\020\010\022\r\n\tPUT_STATE\020\t\022\r\n\tDEL_STATE\020\n\022\024\n\020I" +
+      "NVOKE_CHAINCODE\020\013\022\020\n\014INVOKE_QUERY\020\014\022\014\n\010R" +
+      "ESPONSE\020\r\022\t\n\005QUERY\020\016\022\023\n\017QUERY_COMPLETED\020" +
+      "\017\022\017\n\013QUERY_ERROR\020\020\022\025\n\021RANGE_QUERY_STATE\020" +
+      "\021\022\032\n\026RANGE_QUERY_STATE_NEXT\020\022\022\033\n\027RANGE_Q" +
+      "UERY_STATE_CLOSE\020\023\"*\n\014PutStateInfo\022\013\n\003ke" +
+      "y\030\001 \001(\t\022\r\n\005value\030\002 \001(\014\"3\n\017RangeQueryStat" +
+      "e\022\020\n\010startKey\030\001 \001(\t\022\016\n\006endKey\030\002 \001(\t\"!\n\023R",
+      "angeQueryStateNext\022\n\n\002ID\030\001 \001(\t\"\"\n\024RangeQ" +
+      "ueryStateClose\022\n\n\002ID\030\001 \001(\t\"5\n\027RangeQuery" +
+      "StateKeyValue\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(" +
+      "\014\"n\n\027RangeQueryStateResponse\0226\n\rkeysAndV" +
+      "alues\030\001 \003(\0132\037.protos.RangeQueryStateKeyV" +
+      "alue\022\017\n\007hasMore\030\002 \001(\010\022\n\n\002ID\030\003 \001(\t*4\n\024Con" +
+      "fidentialityLevel\022\n\n\006PUBLIC\020\000\022\020\n\014CONFIDE" +
+      "NTIAL\020\0012X\n\020ChaincodeSupport\022D\n\010Register\022" +
+      "\030.protos.ChaincodeMessage\032\030.protos.Chain" +
+      "codeMessage\"\000(\0010\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10333,69 +9686,57 @@ public final class Chaincode {
     internal_static_protos_ChaincodeDeploymentSpec_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protos_ChaincodeDeploymentSpec_descriptor,
-        new java.lang.String[] { "ChaincodeSpec", "EffectiveDate", "CodePackage", });
+        new java.lang.String[] { "ChaincodeSpec", "EffectiveDate", "CodePackage", "ExecEnv", });
     internal_static_protos_ChaincodeInvocationSpec_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_protos_ChaincodeInvocationSpec_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protos_ChaincodeInvocationSpec_descriptor,
         new java.lang.String[] { "ChaincodeSpec", });
-    internal_static_protos_ChaincodeIdentifier_descriptor =
+    internal_static_protos_ChaincodeSecurityContext_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_protos_ChaincodeIdentifier_fieldAccessorTable = new
+    internal_static_protos_ChaincodeSecurityContext_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_protos_ChaincodeIdentifier_descriptor,
-        new java.lang.String[] { "Url", });
-    internal_static_protos_ChaincodeRequestContext_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_protos_ChaincodeRequestContext_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_protos_ChaincodeRequestContext_descriptor,
-        new java.lang.String[] { "Id", });
-    internal_static_protos_ChaincodeExecutionContext_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_protos_ChaincodeExecutionContext_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_protos_ChaincodeExecutionContext_descriptor,
-        new java.lang.String[] { "ChaincodeId", "Timestamp", });
+        internal_static_protos_ChaincodeSecurityContext_descriptor,
+        new java.lang.String[] { "CallerCert", "CallerSign", "Payload", "Binding", "Metadata", "ParentMetadata", });
     internal_static_protos_ChaincodeMessage_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_protos_ChaincodeMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protos_ChaincodeMessage_descriptor,
-        new java.lang.String[] { "Type", "Timestamp", "Payload", "Uuid", });
+        new java.lang.String[] { "Type", "Timestamp", "Payload", "Uuid", "SecurityContext", });
     internal_static_protos_PutStateInfo_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_protos_PutStateInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protos_PutStateInfo_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_protos_RangeQueryState_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_protos_RangeQueryState_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protos_RangeQueryState_descriptor,
         new java.lang.String[] { "StartKey", "EndKey", });
     internal_static_protos_RangeQueryStateNext_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_protos_RangeQueryStateNext_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protos_RangeQueryStateNext_descriptor,
         new java.lang.String[] { "ID", });
     internal_static_protos_RangeQueryStateClose_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_protos_RangeQueryStateClose_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protos_RangeQueryStateClose_descriptor,
         new java.lang.String[] { "ID", });
     internal_static_protos_RangeQueryStateKeyValue_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_protos_RangeQueryStateKeyValue_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protos_RangeQueryStateKeyValue_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_protos_RangeQueryStateResponse_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_protos_RangeQueryStateResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protos_RangeQueryStateResponse_descriptor,

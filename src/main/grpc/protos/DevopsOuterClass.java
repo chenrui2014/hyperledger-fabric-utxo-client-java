@@ -1444,21 +1444,21 @@ public final class DevopsOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\014devops.proto\022\006protos\032\017chaincode.proto\032" +
-      "\017openchain.proto\"0\n\006Secret\022\020\n\010enrollId\030\001" +
-      " \001(\t\022\024\n\014enrollSecret\030\002 \001(\t\"\272\001\n\013BuildResu" +
-      "lt\022.\n\006status\030\001 \001(\0162\036.protos.BuildResult." +
-      "StatusCode\022\013\n\003msg\030\002 \001(\t\0227\n\016deploymentSpe" +
-      "c\030\003 \001(\0132\037.protos.ChaincodeDeploymentSpec" +
-      "\"5\n\nStatusCode\022\r\n\tUNDEFINED\020\000\022\013\n\007SUCCESS" +
-      "\020\001\022\013\n\007FAILURE\020\0022\271\002\n\006Devops\022+\n\005Login\022\016.pr" +
-      "otos.Secret\032\020.protos.Response\"\000\022A\n\005Build" +
-      "\022\025.protos.ChaincodeSpec\032\037.protos.Chainco",
-      "deDeploymentSpec\"\000\022B\n\006Deploy\022\025.protos.Ch" +
-      "aincodeSpec\032\037.protos.ChaincodeDeployment" +
-      "Spec\"\000\022=\n\006Invoke\022\037.protos.ChaincodeInvoc" +
-      "ationSpec\032\020.protos.Response\"\000\022<\n\005Query\022\037" +
-      ".protos.ChaincodeInvocationSpec\032\020.protos" +
-      ".Response\"\000b\006proto3"
+      "\014fabric.proto\"0\n\006Secret\022\020\n\010enrollId\030\001 \001(" +
+      "\t\022\024\n\014enrollSecret\030\002 \001(\t\"\272\001\n\013BuildResult\022" +
+      ".\n\006status\030\001 \001(\0162\036.protos.BuildResult.Sta" +
+      "tusCode\022\013\n\003msg\030\002 \001(\t\0227\n\016deploymentSpec\030\003" +
+      " \001(\0132\037.protos.ChaincodeDeploymentSpec\"5\n" +
+      "\nStatusCode\022\r\n\tUNDEFINED\020\000\022\013\n\007SUCCESS\020\001\022" +
+      "\013\n\007FAILURE\020\0022\271\002\n\006Devops\022+\n\005Login\022\016.proto" +
+      "s.Secret\032\020.protos.Response\"\000\022A\n\005Build\022\025." +
+      "protos.ChaincodeSpec\032\037.protos.ChaincodeD",
+      "eploymentSpec\"\000\022B\n\006Deploy\022\025.protos.Chain" +
+      "codeSpec\032\037.protos.ChaincodeDeploymentSpe" +
+      "c\"\000\022=\n\006Invoke\022\037.protos.ChaincodeInvocati" +
+      "onSpec\032\020.protos.Response\"\000\022<\n\005Query\022\037.pr" +
+      "otos.ChaincodeInvocationSpec\032\020.protos.Re" +
+      "sponse\"\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1472,7 +1472,7 @@ public final class DevopsOuterClass {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           protos.Chaincode.getDescriptor(),
-          protos.Openchain.getDescriptor(),
+          protos.Fabric.getDescriptor(),
         }, assigner);
     internal_static_protos_Secret_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -1487,7 +1487,7 @@ public final class DevopsOuterClass {
         internal_static_protos_BuildResult_descriptor,
         new java.lang.String[] { "Status", "Msg", "DeploymentSpec", });
     protos.Chaincode.getDescriptor();
-    protos.Openchain.getDescriptor();
+    protos.Fabric.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
